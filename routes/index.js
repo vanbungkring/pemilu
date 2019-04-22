@@ -10,7 +10,7 @@ const request = require('request');
 const numeral = require('numeral');
 const async = require('async');
 /* GET home page. */
-router.get('/:id*?',cached,getInformation);
+router.get('/', cached, getInformation);
 
 function cached(req, res, next) {
   client.get(current_page, function(err, data) {
