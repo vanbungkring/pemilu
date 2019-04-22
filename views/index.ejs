@@ -13,6 +13,8 @@
   <meta property="og:url" content="https://pemilu.masmadmad.com" />
   <meta property="og:description" content="#Bandingkan , antara kawal pemilu x komisi pemilihan umum, Mari gotong royong, Pantau pemilu - Jaga Suara 2019" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="/javascripts/cart.js"></script>
 </head>
 <style media="screen">
   table {
@@ -36,6 +38,9 @@
   <div class="alert alert-danger">
     <p>Semua table informasi di bawah ini merupakan kurasi dari situs kawalpemilu dan Official Resmi Dari KPU, <strong>dan untuk Data pada halaman ini masih belum final dan akan terus diperbarui secara berkala!</strong>
     </p>
+  </div>
+  <div class="container-fluid">
+  
   </div>
   <table class="table table-bordered table-md">
     <tr style="background:#000;color:#fff;text-align:center;vertical-align:top">
@@ -71,9 +76,10 @@
         <%=numeral(kpjs1+kpjs2).format(0,0)%>
       </td>
       <td class="tg-khjd">
-        <%=numeral(total_cakupan).format(0.0)%> dari <%=numeral(data.KPU.progress.total).format(0.0)%>
-        <br>
-        <small><%= parseFloat((total_cakupan/data.KPU.progress.total)*100).toPrecision(4)%> % dari data KPU</small>
+        <%=numeral(total_cakupan).format(0.0)%> dari
+          <%=numeral(data.KPU.progress.total).format(0.0)%>
+            <br>
+            <small><%= parseFloat((total_cakupan/data.KPU.progress.total)*100).toPrecision(4)%> % dari data KPU</small>
       </td>
       <td class="tg-khjd">
         <%=numeral(data.KPU.chart[21]).format(0,0)%>
