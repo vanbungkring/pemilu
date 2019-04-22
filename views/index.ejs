@@ -5,17 +5,20 @@
   <title>
     KAWALPEMILU X KOMISI PEMILIHAN UMUM
   </title>
-  <meta property="description"
-   content="#Bandingkan , antara kawal pemilu x komisi pemilihan umum, Mari gotong royong, Pantau pemilu - Jaga Suara 2019 " />
+  <meta property="description" content="#Bandingkan , antara kawal pemilu x komisi pemilihan umum, Mari gotong royong, Pantau pemilu - Jaga Suara 2019 " />
 
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <meta property="og:type" content="article" />
- <meta property="og:title" content="Pemilu" />
-   <meta property="og:url" content="https://pemilu.masmadmad.com" />
- <meta property="og:description"
-   content="#Bandingkan , antara kawal pemilu x komisi pemilihan umum, Mari gotong royong, Pantau pemilu - Jaga Suara 2019" />
+  <meta property="og:title" content="Pemilu" />
+  <meta property="og:url" content="https://pemilu.masmadmad.com" />
+  <meta property="og:description" content="#Bandingkan , antara kawal pemilu x komisi pemilihan umum, Mari gotong royong, Pantau pemilu - Jaga Suara 2019" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
+<style media="screen">
+  table {
+    font-size: small;
+  }
+</style>
 
 <body>
   <h1>Hasil Tabulasi Realtime Jaga suara 2019 (Kawal Pemilu dan KPU)</h1>
@@ -34,10 +37,10 @@
     <p>Semua table informasi di bawah ini merupakan kurasi dari situs kawalpemilu dan Official Resmi Dari KPU, <strong>dan untuk Data pada halaman ini masih belum final dan akan terus diperbarui secara berkala!</strong>
     </p>
   </div>
-  <table class="table table-bordered sm">
+  <table class="table table-bordered table-md">
     <tr style="background:#000;color:#fff;text-align:center;vertical-align:top">
       <th class="tg-wy7m" colspan="2">Nama Wilayah</th>
-      <th class="tg-s9og" colspan="3">Kawal Pemilu Jaga Suara</th>
+      <th class="tg-s9og" colspan="4">Kawal Pemilu Jaga Suara</th>
       <th class="tg-1sci" colspan="3">Komisi Pemilihan Umum</th>
     </tr>
     <tr style="background-color:#333333;color:#ffffff;text-align:center;vertical-align:top">
@@ -47,6 +50,7 @@
       <td class="tg-7f7m">Prabowo-Sandi (
         <%=parseFloat(kpjs2/(kpjs1+kpjs2)*100).toPrecision(4)%> %)</td>
       <td class="tg-7f7m">Total </td>
+      <td class="tg-khjd">Cakupan TPS</td>
       <td class="tg-7f7m">Jokowi-Amin (
         <%=parseFloat(data.KPU.chart[21]/(data.KPU.chart[21]+data.KPU.chart[22])*100).toPrecision(4)%> %)</td>
       <td class="tg-7f7m">Prabowo-Sandi (
@@ -55,6 +59,7 @@
     </tr>
     <tr style="text-align:center;vertical-align:top;background:#c0c0c0">
       <td class="tg-khjd" colspan="2">Total</td>
+
       <td class="tg-khjd">
         <%=numeral(kpjs1).format(0,0)%>
       </td>
@@ -64,6 +69,11 @@
 
       <td class="tg-khjd">
         <%=numeral(kpjs1+kpjs2).format(0,0)%>
+      </td>
+      <td class="tg-khjd">
+        <%=numeral(total_cakupan).format(0.0)%> dari <%=numeral(data.KPU.progress.total).format(0.0)%>
+        <br>
+        <small><%= parseFloat((total_cakupan/data.KPU.progress.total)*100).toPrecision(4)%> % dari data KPU</small>
       </td>
       <td class="tg-khjd">
         <%=numeral(data.KPU.chart[21]).format(0,0)%>
@@ -102,7 +112,13 @@
                               <%=numeral(parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas1'])+parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas2'])).format(0,0)%>
 
                             </td>
+                            <td class="tg-0lax">
+                              <%=numeral(data.KP.data[parseInt(KP[0])]['sum']['cakupan']).format(0,0) %> dari <%=numeral(KP[2]).format(0.0)%>
+                              <div class="progress">
+    <div class="progress-bar bg-success" role="progressbar" style="width: <%=parseFloat(parseFloat(data.KP.data[parseInt(KP[0])]['sum']['cakupan'])/parseInt(KP[2]))*100%>%"aria-valuenow="25" aria-valuemin="0" aria-valuemax="<%=parseInt(KP[2])%>"></div>
+  </div>
 
+                            </td>
 
                             <%if(suaraKPU1>suaraKPU2){%>
                               <td class="tg-0lax" style="background:#d4edda; font-weight:bold">
