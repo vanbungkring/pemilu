@@ -60,14 +60,39 @@ router.get('/', function(req, res, next) {
     var keysSorted = (Object.keys(results.HASIL.table["3303"]).sort(function(a, b) {
       return results.HASIL.table["3303"][b] - results.HASIL.table["3303"][a]
     }))
+    var chair = [];
+    var round = [];
+    for (var i = 0; i < 9; i++) {
+      chair.push(i + 1);
+      round.push(i);
+    }
     for (var i = 0; i < keysSorted.length; i++) {
       sortable.push({
         'key': keysSorted[i],
         'count': results.HASIL.table["3303"][keysSorted[i]],
+        'chair': []
       })
     }
-    console.log(results);
-
+    var highest = sortable[0].count;
+    var compared = 0;
+    for (var i = 0; i < 10; i++) {
+      if (i === 0) {
+        compared = highest / 1;
+      }
+      if (i === 1) {
+        compared = highest / 3;
+      }
+      else {
+        compared = highest / 5;
+      }
+      for (var j = 0; j < sortable.length; j++) {
+        var sorts = sortable[j];
+        if (sorts.count >= compared && chair.length) {
+            sorts.chair.push(chair.shift());
+        }
+      }
+    }
+    console.log(sortable);
     res.render('dapil3', {
       title: 'DAPIL',
       data: results,
@@ -77,23 +102,7 @@ router.get('/', function(req, res, next) {
       hasil_sorted: sortable,
       numeral: numeral
     });
-    //   //res.json(results);
-    //   var kpjs1 = 0;
-    //   var kpjs2 = 0;
-    //   console.log(results.KP);
-    //   for (var i = 0, len = results.KP.children.length; i < len; i++) {
-    //     var kpjs1 = kpjs1 + parseInt(results.KP.data[results.KP.children[i][0]]['sum']['pas1'])
-    //     console.log(kpjs1);
-    //     var kpjs2 = kpjs1 + parseInt(results.KP.data[results.KP.children[i][0]]['sum']['pas2'])
-    //     console.log(kpjs2);
-    //   }
-    //   res.render('index', {
-    //     title: KPU,
-    //     data: results,
-    //     kpjs1: kpjs1,
-    //     kpjs2: kpjs2,
-    //     numeral: numeral
-    //   });
+    
   });
 });
 

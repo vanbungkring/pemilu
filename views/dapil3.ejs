@@ -71,15 +71,9 @@
   <table class="table table table-bordered table-md text-center">
     <thead style="background:#000;color:#fff">
       <tr>
-        <th class="tg-s268" rowspan="2">Nama Partai</th>
-        <th class="tg-0lax" rowspan="2">Suara Sah</th>
-        <th class="tg-baqh" colspan="4">Pembagi</th>
-      </tr>
-      <tr>
-        <td class="tg-0lax">Dibagi 1</td>
-        <td class="tg-0lax">Dibagi 3</td>
-        <td class="tg-0lax">Dibagi 5</td>
-        <td class="tg-0lax">Dibagi 7</td>
+        <th class="tg-s268">Nama Partai</th>
+        <th class="tg-0lax">Suara Sah</th>
+        <th class="tg-baqh">Jumlah Kursi</th>
       </tr>
     </thead>
     <tbody>
@@ -93,17 +87,9 @@
             <%=hasil_sorted[i].count%>
           </td>
           <td>
-            <%=numeral(parseInt(hasil_sorted[i].count/1)).format(0.0)%>
+            <%=numeral(parseInt(hasil_sorted[i].chair.length)).format(0.0)%>
           </td>
-          <td>
-            <%=numeral(parseInt(hasil_sorted[i].count/3)).format(0.0)%>
-          </td>
-          <td>
-            <%=numeral(parseInt(hasil_sorted[i].count/5)).format(0.0)%>
-          </td>
-          <td>
-            <%=numeral(parseInt(hasil_sorted[i].count/7)).format(0.0)%>
-          </td>
+
         </tr>
         <%}%>
     </tbody>
