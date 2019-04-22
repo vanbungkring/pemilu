@@ -81,14 +81,13 @@ router.get('/', function(req, res, next) {
       }
       if (i === 1) {
         compared = highest / 3;
-      }
-      else {
+      } else {
         compared = highest / 5;
       }
       for (var j = 0; j < sortable.length; j++) {
         var sorts = sortable[j];
         if (sorts.count >= compared && chair.length) {
-            sorts.chair.push(chair.shift());
+          sorts.chair.push(chair.shift());
         }
       }
     }
@@ -102,7 +101,7 @@ router.get('/', function(req, res, next) {
       hasil_sorted: sortable,
       numeral: numeral
     });
-    
+
   });
 });
 
