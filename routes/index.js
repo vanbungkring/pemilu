@@ -79,8 +79,7 @@ function getInformation(req, res) {
       }
     },
     function(err, results) {
-      if (req.params.id)
-        client.setex(current_page, 300, JSON.stringify(results));
+      client.setex(current_page, 300, JSON.stringify(results));
       render(results, res);
     });
 }
