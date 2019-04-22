@@ -8,6 +8,7 @@
   "dependencies": {
     "agenda": "^2.0.2",
     "async": "^2.6.2",
+    "cached-request": "^1.1.4",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",

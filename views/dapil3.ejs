@@ -86,7 +86,7 @@
           <td>
             <%=hasil_sorted[i].count%>
           </td>
-          <td>
+          <td style="background:<%=data.PARTAI[hasil_sorted[i].key]['warna']%>; color:#ccc">
             <%=numeral(parseInt(hasil_sorted[i].chair.length)).format(0.0)%> (<%=hasil_sorted[i].chair%>)
           </td>
 
