@@ -74,12 +74,14 @@
 
       <td class="tg-khjd">
         <%=numeral(kpjs1+kpjs2).format(0,0)%>
+        <br>
+      <strong><%= parseFloat(((kpjs1+kpjs2)/parseInt(data.KPU.chart[21]+data.KPU.chart[22]))*100).toPrecision(4)%> % dari data KPU</strong>
       </td>
       <td class="tg-khjd">
         <%=numeral(total_cakupan).format(0.0)%> dari
           <%=numeral(data.KPU.progress.total).format(0.0)%>
             <br>
-            <small><%= parseFloat((total_cakupan/data.KPU.progress.total)*100).toPrecision(4)%> % dari data KPU</small>
+            <strong><%= parseFloat((total_cakupan/data.KPU.progress.total)*100).toPrecision(4)%> % dari data KPU</strong>
       </td>
       <td class="tg-khjd">
         <%=numeral(data.KPU.chart[21]).format(0,0)%>
@@ -95,10 +97,12 @@
       <tr>
         <%var suaraKPJS1=parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas1'])%>
           <%var suaraKPJS2=parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas2'])%>
-            <%var suaraKPU1=parseInt(data.KPU.table[parseInt(KP[0])]['21'])%>
-              <%var suaraKPU2=parseInt(data.KPU.table[parseInt(KP[0])]['22'])%>
-                <td class="tg-0lax" colspan="2">
-                  <strong><%=KP[1]%> <strong>
+            <%var totalSuaraKPJ=parseInt(suaraKPJS1+suaraKPJS2)%>
+              <%var suaraKPU1=parseInt(data.KPU.table[parseInt(KP[0])]['21'])%>
+                <%var suaraKPU2=parseInt(data.KPU.table[parseInt(KP[0])]['22'])%>
+                  <%var totalSuaraKPU=parseInt(suaraKPU1+suaraKPU2)%>
+                    <td class="tg-0lax" colspan="2">
+                      <strong><%=KP[1]%> <strong>
                 </td>
                 <%if(suaraKPJS1>suaraKPJS2){%>
                   <td class="tg-0lax" style="background:#d4edda; font-weight:bold">
