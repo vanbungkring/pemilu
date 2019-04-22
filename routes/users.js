@@ -47,7 +47,6 @@ router.get('/', function(req, res, next) {
       });
     }
   }, function(err, results) {
-    var dapil = Object.values(results.DAPIL);
     var partai = Object.values(results.PARTAI);
     var hasil = Object.values(results.HASIL);
     if (req.xhr) {
@@ -57,12 +56,25 @@ router.get('/', function(req, res, next) {
         data: results
       })
     }
+    var sortable = [];
+    var keysSorted = (Object.keys(results.HASIL.table["3303"]).sort(function(a, b) {
+      return results.HASIL.table["3303"][b] - results.HASIL.table["3303"][a]
+    }))
+    for (var i = 0; i < keysSorted.length; i++) {
+      sortable.push({
+        'key': keysSorted[i],
+        'count': results.HASIL.table["3303"][keysSorted[i]],
+      })
+    }
+    console.log(results);
+
     res.render('dapil3', {
       title: 'DAPIL',
       data: results,
       partai: partai,
       dapil: "JAWA TENGAH III",
       hasil: results.HASIL.table["3303"],
+      hasil_sorted: sortable,
       numeral: numeral
     });
     //   //res.json(results);

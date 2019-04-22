@@ -35,10 +35,10 @@
     </p>
   </div>
   <div class="row">
-            <div class="col-md-12">
-              <canvas id="hasil"></canvas>
-            </div>
-          </div>
+    <div class="col-md-12">
+      <canvas id="hasil"></canvas>
+    </div>
+  </div>
   <table class="table table-stripped">
     <thead>
       <tr>
@@ -68,6 +68,46 @@
     </tbody>
   </table>
   <h1>Perolehan Kursi</h1>
+  <table class="table table table-bordered table-md text-center">
+    <thead style="background:#000;color:#fff">
+      <tr>
+        <th class="tg-s268" rowspan="2">Nama Partai</th>
+        <th class="tg-0lax" rowspan="2">Suara Sah</th>
+        <th class="tg-baqh" colspan="4">Pembagi</th>
+      </tr>
+      <tr>
+        <td class="tg-0lax">Dibagi 1</td>
+        <td class="tg-0lax">Dibagi 3</td>
+        <td class="tg-0lax">Dibagi 5</td>
+        <td class="tg-0lax">Dibagi 7</td>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% for(var i=0;i<hasil_sorted.length;i++){%>
+        <tr>
+          <td>
+            <%=data.PARTAI[hasil_sorted[i].key]['nama']%>
+          </td>
+          <td>
+            <%=hasil_sorted[i].count%>
+          </td>
+          <td>
+            <%=numeral(parseInt(hasil_sorted[i].count/1)).format(0.0)%>
+          </td>
+          <td>
+            <%=numeral(parseInt(hasil_sorted[i].count/3)).format(0.0)%>
+          </td>
+          <td>
+            <%=numeral(parseInt(hasil_sorted[i].count/5)).format(0.0)%>
+          </td>
+          <td>
+            <%=numeral(parseInt(hasil_sorted[i].count/7)).format(0.0)%>
+          </td>
+        </tr>
+        <%}%>
+    </tbody>
+  </table>
 </body>
 <script type="text/javascript">
   $.ajax({
@@ -84,7 +124,7 @@
         }
       }
       var ctx = document.getElementById("hasil").getContext('2d');
-         ctx.height = 500;
+      ctx.height = 500;
       var myChart = new Chart(ctx, {
         type: 'bar',
         data: {

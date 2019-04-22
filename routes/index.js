@@ -38,11 +38,11 @@ router.get('/', function(req, res, next) {
     var kpjs1 = 0;
     var kpjs2 = 0;
     var total_cakupan = 0;
-  console.log(results.KP);
+    console.log(results.KP);
     for (var i = 0, len = results.KP.children.length; i < len; i++) {
-      total_cakupan = total_cakupan+parseInt(results.KP.data[results.KP.children[i][0]]['sum']['cakupan'])
-       kpjs1 = kpjs1 + parseInt(results.KP.data[results.KP.children[i][0]]['sum']['pas1'])
-       kpjs2 = kpjs1 + parseInt(results.KP.data[results.KP.children[i][0]]['sum']['pas2'])
+      total_cakupan = total_cakupan + parseInt(results.KP.data[results.KP.children[i][0]]['sum']['cakupan'])
+      kpjs1 = kpjs1 + parseInt(results.KP.data[results.KP.children[i][0]]['sum']['pas1'])
+      kpjs2 = kpjs1 + parseInt(results.KP.data[results.KP.children[i][0]]['sum']['pas2'])
 
     }
     res.render('index', {
@@ -50,7 +50,7 @@ router.get('/', function(req, res, next) {
       data: results,
       kpjs1: kpjs1,
       kpjs2: kpjs2,
-      total_cakupan:total_cakupan,
+      total_cakupan: total_cakupan,
       numeral: numeral
     });
   });
