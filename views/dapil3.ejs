@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    KAWALPEMILU X KOMISI PEMILIHAN UMUM
+  </title>
+  <meta property="description" content="#Bandingkan , antara kawal pemilu x komisi pemilihan umum, Mari gotong royong, Pantau pemilu - Jaga Suara 2019 " />
+
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Pemilu" />
+  <meta property="og:url" content="https://pemilu.masmadmad.com" />
+  <meta property="og:description" content="#Bandingkan , antara kawal pemilu x komisi pemilihan umum, Mari gotong royong, Pantau pemilu - Jaga Suara 2019" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+  <h1>Hasil Tabulasi Realtime Jaga suara LEGISLATIF</h1>
+  <p>Situs ini mengagregasi Suara dari 2 sumber yaitu kawalpemilu dan situs resmi KPU
+  </p>
+  <div class="alert alert-success">
+    <p><a href="https://kawalpemilu.org/disclaimer/" target="_blank" style="color:black; text-decoration: none">
+          Semua informasi di Kolom Kawal Pemilu dipublikasikan dengan itikad
+          baik dan hanya untuk tujuan informasi bagi publik dan
+          <strong>bukan merupakan hasil resmi</strong> dari penyelenggara Pemilu.
+          Pengumpulan dan penginputan data pada situs ini dilakukan dengan cara
+          <em>crowd sourcing</em> atau gotong royong.</a> Untuk Hasil KPU ada kolom di sebelah Kanan
+    </p>
+  </div>
+  <div class="alert alert-danger">
+    <p>Semua table informasi di bawah ini merupakan kurasi dari situs kawalpemilu dan Official Resmi Dari KPU, <strong>dan untuk Data pada halaman ini masih belum final dan akan terus diperbarui secara berkala!</strong>
+    </p>
+  </div>
+  <table class="table table-stripped">
+    <thead>
+      <tr>
+        <th scope="col">Wilayah</th>
+        <% for(var i=0;i<partai.length;i++){%>
+          <%if(partai[i]['is_aceh']===false){%>
+            <th scope="col">
+              <%=partai[i]['nama']%>
+            </th>
+            <% }%>
+              <% }%>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          DAPIL 3 JAWA TENGAH
+        </td>
+        <% for(var i=0;i<partai.length;i++){%>
+          <%if(partai[i]['is_aceh']===false){%>
+            <td>
+              <%=numeral(hasil[partai[i]['nomor_urut']]).format(0,0)%>
+            </td>
+            <% }%>
+              <% }%>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>
