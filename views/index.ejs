@@ -19,6 +19,7 @@
 <style media="screen">
   table {
     font-size: small;
+    vertical-align: middle;
   }
 </style>
 
@@ -42,9 +43,11 @@
   <div class="container-fluid">
     <div class="row">
       <br>
-      <div class="col-md-6"><canvas id="KPJS"></canvas> </br></div>
-      <div class="col-md-6"><canvas id="KPU"></canvas></div></div>
+      <div class="col-md-6"><canvas id="KPJS"></canvas> </br>
+      </div>
+      <div class="col-md-6"><canvas id="KPU"></canvas></div>
     </div>
+  </div>
   </div>
   <table class="table table-bordered table-md">
     <tr style="background:#000;color:#fff;text-align:center;vertical-align:top">
@@ -89,8 +92,8 @@
             <strong><%= parseFloat((total_cakupan/data.KPU.progress.total)*100).toPrecision(4)%> % dari data KPU</strong>
       </td>
       <script>
-      var suaraKPU1 = <%=data.KPU.chart[21]%>
-      var suaraKPU2 = <%=data.KPU.chart[22]%>
+        var suaraKPU1 = <%=data.KPU.chart[21]%>
+        var suaraKPU2 = <%=data.KPU.chart[22]%>
       </script>
       <td class="tg-khjd">
         <%=numeral(data.KPU.chart[21]).format(0,0)%>
@@ -100,6 +103,8 @@
       </td>
       <td class="tg-khjd">
         <%=numeral(parseInt(data.KPU.chart[21]+data.KPU.chart[22])).format(0,0)%>
+        <br>
+        <strong><%= parseFloat((data.KPU.progress.proses/parseInt(data.KPU.progress.total)*100)).toPrecision(4)%> % dari Total TPS</strong>
       </td>
     </tr>
     <%data.KP.children.forEach(function(KP){%>
