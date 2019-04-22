@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    KAWALPEMILU X KOMISI PEMILIHAN UMUM
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+  <h1>Agregasi Realtime Jaga suara 2019</h1>
+  <p>Situs ini mengagregasi Suara dari 2 sumber yaitu kawalpemilu dan situs resmi KPU
+  </p>
+  <div class="alert alert-success">
+      <p><a href="https://kawalpemilu.org/disclaimer/" target="_blank" style="color:black; text-decoration: none">
+          Semua informasi di Kolom Kawal Pemilu dipublikasikan dengan itikad
+          baik dan hanya untuk tujuan informasi bagi publik dan
+          <strong>bukan merupakan hasil resmi</strong> dari penyelenggara Pemilu.
+          Pengumpulan dan penginputan data pada situs ini dilakukan dengan cara
+          <em>crowd sourcing</em> atau gotong royong.</a>
+          Untuk Hasil  KPU ada kolom di sebelah Kanan
+        </p>
+    </div>
+    <div class="alert alert-danger">
+        <p>Semua table informasi di bawah ini merupakan kurasi dari situs kawalpemilu dan Official Resmi Dari KPU, <strong>dan untuk Data pada halaman ini masih belum final dan akan terus diperbarui secara berkala!</strong>
+          </p>
+      </div>
+  <table class="table table-bordered">
+    <tr style="background:#000;color:#fff;text-align:center;vertical-align:top">
+      <th class="tg-wy7m" colspan="2">Nama Wilayah</th>
+      <th class="tg-s9og" colspan="3">Kawal Pemilu Jaga Suara</th>
+      <th class="tg-1sci" colspan="3">Komisi Pemilihan Umum</th>
+    </tr>
+    <tr style="background-color:#333333;color:#ffffff;text-align:center;vertical-align:top">
+      <td class="tg-7f7m" colspan="2">Keterangan</td>
+      <td class="tg-7f7m">Paslon 01</td>
+      <td class="tg-7f7m">Paslon 02</td>
+      <td class="tg-7f7m">Total</td>
+      <td class="tg-7f7m">Paslon 01</td>
+      <td class="tg-7f7m">Paslon 02</td>
+      <td class="tg-7f7m">total</td>
+    </tr>
+    <tr style="text-align:center;vertical-align:top;background:#c0c0c0">
+      <td class="tg-khjd" colspan="2">Total</td>
+      <td class="tg-khjd">
+        <%=numeral(kpjs1).format(0,0)%>
+      </td>
+      <td class="tg-khjd">
+        <%=numeral(kpjs2).format(0,0)%>
+      </td>
+
+      <td class="tg-khjd">
+        <%=numeral(kpjs1+kpjs2).format(0,0)%>
+      </td>
+      <td class="tg-khjd">
+        <%=numeral(data.KPU.chart[21]).format(0,0)%>
+      </td>
+      <td class="tg-khjd">
+        <%=numeral(data.KPU.chart[22]).format(0,0)%>
+      </td>
+      <td class="tg-khjd">
+        <%=numeral(parseInt(data.KPU.chart[21]+data.KPU.chart[22])).format(0,0)%>
+      </td>
+    </tr>
+    <%data.KP.children.forEach(function(KP){%>
+      <tr>
+        <%var suaraKPJS1=parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas1'])%>
+          <%var suaraKPJS2=parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas2'])%>
+            <%var suaraKPU1=parseInt(data.KPU.table[parseInt(KP[0])]['21'])%>
+              <%var suaraKPU2=parseInt(data.KPU.table[parseInt(KP[0])]['22'])%>
+                <td class="tg-0lax" colspan="2">
+                  <%=KP[1]%>
+                </td>
+                <%if(suaraKPJS1>suaraKPJS2){%>
+                  <td class="tg-0lax" style="background:#d4edda; font-weight:bold">
+                    <%}else{%>
+                      <td class="tg-0lax">
+                        <%}%>
+                          <%=numeral(suaraKPJS1).format(0,0)%>
+                      </td>
+                      <%if(suaraKPJS1<suaraKPJS2){%>
+                        <td class="tg-0lax" style="background:#d4edda; font-weight:bold">
+                          <%}else{%>
+                            <td class="tg-0lax">
+                              <%}%>
+                                <%=numeral(suaraKPJS2).format(0,0)%>
+                            </td>
+                            <td class="tg-0lax">
+                              <%=numeral(parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas1'])+parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas2'])).format(0,0)%>
+
+                            </td>
+
+
+                            <%if(suaraKPU1>suaraKPU2){%>
+                              <td class="tg-0lax" style="background:#d4edda; font-weight:bold">
+                                <%}else{%>
+                                  <td class="tg-0lax">
+                                    <%}%>
+                              <%=numeral(data.KPU.table[parseInt(KP[0])]['21']).format(0,0)%>
+                            </td>
+                            <%if(suaraKPU1<suaraKPU2){%>
+                              <td class="tg-0lax" style="background:#d4edda; font-weight:bold">
+                                <%}else{%>
+                                  <td class="tg-0lax">
+                                    <%}%>
+                              <%=numeral(data.KPU.table[parseInt(KP[0])]['22']).format(0,0)%>
+                            </td>
+                            <td class="tg-0lax">
+                              <%=numeral(parseInt(data.KPU.table[parseInt(KP[0])]['21'])+parseInt(data.KPU.table[parseInt(KP[0])]['22'])).format(0,0)%>
+                            </td>
+      </tr>
+      <%})%>
+  </table>
+</body>
+
+</html>
