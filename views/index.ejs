@@ -58,16 +58,12 @@
 
     <tr style="background-color:#333333;color:#ffffff;text-align:center;vertical-align:top">
       <td class="tg-7f7m" colspan="2">Keterangan</td>
-      <td class="tg-7f7m">Jokowi-Amin (
-        <%=parseFloat(kpjs1/(kpjs1+kpjs2)*100).toPrecision(4)%> %)</td>
-      <td class="tg-7f7m">Prabowo-Sandi (
-        <%=parseFloat(kpjs2/(kpjs1+kpjs2)*100).toPrecision(4)%> %)</td>
+      <td class="tg-7f7m">Jokowi-Amin </td>
+      <td class="tg-7f7m">Prabowo-Sandi</td>
       <td class="tg-7f7m">Total </td>
       <td class="tg-khjd">Cakupan TPS</td>
-      <td class="tg-7f7m">Jokowi-Amin (
-        <%=parseFloat(data.KPU.chart[21]/(data.KPU.chart[21]+data.KPU.chart[22])*100).toPrecision(4)%> %)</td>
-      <td class="tg-7f7m">Prabowo-Sandi (
-        <%=parseFloat(data.KPU.chart[22]/(data.KPU.chart[21]+data.KPU.chart[22])*100).toPrecision(4)%> %)</td>
+      <td class="tg-7f7m">Jokowi-Amin
+      <td class="tg-7f7m">Prabowo-Sandi</td>
       <td class="tg-7f7m">Total</td>
     </tr>
     <tr style="text-align:center;vertical-align:top;background:#c0c0c0">
@@ -75,9 +71,13 @@
 
       <td class="tg-khjd">
         <%=numeral(kpjs1).format(0,0)%>
+        <br>
+        <strong>(<%=parseFloat(kpjs1/(kpjs1+kpjs2)*100).toPrecision(4)%>%)</strong>
       </td>
       <td class="tg-khjd">
         <%=numeral(kpjs2).format(0,0)%>
+        <br>
+        <strong>(<%=parseFloat(kpjs2/(kpjs1+kpjs2)*100).toPrecision(4)%>%)</strong>
       </td>
 
       <td class="tg-khjd">
@@ -97,9 +97,15 @@
       </script>
       <td class="tg-khjd">
         <%=numeral(data.KPU.chart[21]).format(0,0)%>
+        <br>
+        <strong>(
+          <%=parseFloat(data.KPU.chart[21]/(data.KPU.chart[21]+data.KPU.chart[22])*100).toPrecision(4)%> %)</strong>
       </td>
       <td class="tg-khjd">
         <%=numeral(data.KPU.chart[22]).format(0,0)%>
+        <br>
+        <strong>(
+          <%=parseFloat(data.KPU.chart[22]/(data.KPU.chart[21]+data.KPU.chart[22])*100).toPrecision(4)%> %)</strong>
       </td>
       <td class="tg-khjd">
         <%=numeral(parseInt(data.KPU.chart[21]+data.KPU.chart[22])).format(0,0)%>
