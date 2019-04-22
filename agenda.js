@@ -1,4 +1,5 @@
 const agenda = require('agenda');
+
 function init() {
   registerAgendaJob();
   removeStaleJobs((err, result) => {
@@ -11,6 +12,7 @@ function init() {
     agenda.start();
   });
 }
+
 function removeStaleJobs(callback) {
   agenda._collection.updateOne({
     lockedAt: {
