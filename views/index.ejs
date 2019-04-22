@@ -10,23 +10,22 @@
 </head>
 
 <body>
-  <h1>Agregasi Realtime Jaga suara 2019</h1>
+  <h1>Hasil Tabulasi Realtime Jaga suara 2019 (Kawal Pemilu dan KPU)</h1>
   <p>Situs ini mengagregasi Suara dari 2 sumber yaitu kawalpemilu dan situs resmi KPU
   </p>
   <div class="alert alert-success">
-      <p><a href="https://kawalpemilu.org/disclaimer/" target="_blank" style="color:black; text-decoration: none">
+    <p><a href="https://kawalpemilu.org/disclaimer/" target="_blank" style="color:black; text-decoration: none">
           Semua informasi di Kolom Kawal Pemilu dipublikasikan dengan itikad
           baik dan hanya untuk tujuan informasi bagi publik dan
           <strong>bukan merupakan hasil resmi</strong> dari penyelenggara Pemilu.
           Pengumpulan dan penginputan data pada situs ini dilakukan dengan cara
-          <em>crowd sourcing</em> atau gotong royong.</a>
-          Untuk Hasil  KPU ada kolom di sebelah Kanan
-        </p>
-    </div>
-    <div class="alert alert-danger">
-        <p>Semua table informasi di bawah ini merupakan kurasi dari situs kawalpemilu dan Official Resmi Dari KPU, <strong>dan untuk Data pada halaman ini masih belum final dan akan terus diperbarui secara berkala!</strong>
-          </p>
-      </div>
+          <em>crowd sourcing</em> atau gotong royong.</a> Untuk Hasil KPU ada kolom di sebelah Kanan
+    </p>
+  </div>
+  <div class="alert alert-danger">
+    <p>Semua table informasi di bawah ini merupakan kurasi dari situs kawalpemilu dan Official Resmi Dari KPU, <strong>dan untuk Data pada halaman ini masih belum final dan akan terus diperbarui secara berkala!</strong>
+    </p>
+  </div>
   <table class="table table-bordered sm">
     <tr style="background:#000;color:#fff;text-align:center;vertical-align:top">
       <th class="tg-wy7m" colspan="2">Nama Wilayah</th>
@@ -35,12 +34,16 @@
     </tr>
     <tr style="background-color:#333333;color:#ffffff;text-align:center;vertical-align:top">
       <td class="tg-7f7m" colspan="2">Keterangan</td>
-      <td class="tg-7f7m">Paslon 01 (<%=parseFloat(kpjs1/(kpjs1+kpjs2)*100).toPrecision(4)%>)</td>
-      <td class="tg-7f7m">Paslon 02 (<%=parseFloat(kpjs2/(kpjs1+kpjs2)*100).toPrecision(4)%>)</td>
+      <td class="tg-7f7m">Jokowi-Amin (
+        <%=parseFloat(kpjs1/(kpjs1+kpjs2)*100).toPrecision(4)%> %)</td>
+      <td class="tg-7f7m">Prabowo-Sandi (
+        <%=parseFloat(kpjs2/(kpjs1+kpjs2)*100).toPrecision(4)%> %)</td>
+      <td class="tg-7f7m">Total </td>
+      <td class="tg-7f7m">Jokowi-Amin (
+        <%=parseFloat(data.KPU.chart[21]/(data.KPU.chart[21]+data.KPU.chart[22])*100).toPrecision(4)%> %)</td>
+      <td class="tg-7f7m">Prabowo-Sandi (
+        <%=parseFloat(data.KPU.chart[22]/(data.KPU.chart[21]+data.KPU.chart[22])*100).toPrecision(4)%> %)</td>
       <td class="tg-7f7m">Total</td>
-      <td class="tg-7f7m">Paslon 01</td>
-      <td class="tg-7f7m">Paslon 02</td>
-      <td class="tg-7f7m">total</td>
     </tr>
     <tr style="text-align:center;vertical-align:top;background:#c0c0c0">
       <td class="tg-khjd" colspan="2">Total</td>
@@ -71,7 +74,7 @@
             <%var suaraKPU1=parseInt(data.KPU.table[parseInt(KP[0])]['21'])%>
               <%var suaraKPU2=parseInt(data.KPU.table[parseInt(KP[0])]['22'])%>
                 <td class="tg-0lax" colspan="2">
-                  <%=KP[1]%>
+                  <strong><%=KP[1]%> <strong>
                 </td>
                 <%if(suaraKPJS1>suaraKPJS2){%>
                   <td class="tg-0lax" style="background:#d4edda; font-weight:bold">
