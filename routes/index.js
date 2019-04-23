@@ -18,14 +18,14 @@ function cached(req, res, next) {
       next();
     };
     if (data != null) {
-      return render(JSON.parse(data), res)
+      return render(JSON.parse(data), req, res)
     } else {
       next();
     }
   });
 }
 
-function render(results, res) {
+function render(results, req, res) {
   var kpjs1 = 0;
   var kpjs2 = 0;
   var total_cakupan = 0;
@@ -34,6 +34,16 @@ function render(results, res) {
     kpjs1 = kpjs1 + parseInt(results.KP.data[results.KP.children[i][0]]['sum']['pas1'])
     kpjs2 = kpjs2 + parseInt(results.KP.data[results.KP.children[i][0]]['sum']['pas2'])
 
+  }
+  if (req.query && req.query.type == 'json') {
+    return res.json({
+      title: KPU,
+      data: results,
+      kpjs1: kpjs1,
+      kpjs2: kpjs2,
+      total_cakupan: total_cakupan,
+      numeral: numeral
+    });
   }
   res.render('index', {
     title: KPU,
@@ -76,7 +86,7 @@ function getInformation(req, res) {
     },
     function(err, results) {
       client.setex(current_page, 40, JSON.stringify(results));
-      render(results, res);
+      render(results, req, res);
     });
 }
 module.exports = router;
