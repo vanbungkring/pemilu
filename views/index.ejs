@@ -55,6 +55,7 @@
     <tr style="background:#000;color:#fff;text-align:center;vertical-align:top">
       <th class="tg-wy7m" colspan="2">Nama Wilayah</th>
       <th class="tg-s9og" colspan="4">Kawal Pemilu Jaga Suara</th>
+      <th class="tg-s9og" colspan="4">Kawal Pilpres</th>
       <th class="tg-1sci" colspan="3">Komisi Pemilihan Umum</th>
     </tr>
 
@@ -64,10 +65,15 @@
       <td class="tg-7f7m">Prabowo-Sandi</td>
       <td class="tg-7f7m">Total </td>
       <td class="tg-khjd">Cakupan TPS</td>
+      <td class="tg-7f7m">Jokowi-Amin </td>
+      <td class="tg-7f7m">Prabowo-Sandi</td>
+      <td class="tg-7f7m">Total </td>
+      <td class="tg-khjd">Cakupan TPS</td>
       <td class="tg-7f7m">Jokowi-Amin
         <td class="tg-7f7m">Prabowo-Sandi</td>
         <td class="tg-7f7m">Total</td>
     </tr>
+
     <tr style="text-align:center;vertical-align:top;background:#c0c0c0">
       <td class="tg-khjd" colspan="2">Total</td>
 
@@ -92,6 +98,33 @@
         <br>
         <strong><%= parseFloat((total_cakupan/data.KPU.progress.total)*100).toPrecision(4)%> % dari data KPU</strong>
       </td>
+      <!-- ->kawal pilpres
+
+      <!--->
+      <td class="tg-khjd">
+
+        <%=numeral(kpp1).format(0,0)%>
+          <br>
+          <strong>(<%=parseFloat(kpp1/(kpp1+kpp2)*100).toPrecision(4)%>%)</strong>
+      </td>
+      <td class="tg-khjd">
+        <%=numeral(kpp2).format(0,0)%>
+          <br>
+          <strong>(<%=parseFloat(kpp2/(kpp2+kpp1)*100).toPrecision(4)%>%)</strong>
+      </td>
+
+      <td class="tg-khjd">
+        <%=numeral(kpp1+kpp2).format(0,0)%>
+      </td>
+      <td class="tg-khjd">
+        <strong><%=numeral(kppcakupan).format(0.0)%> </strong>dari
+        <strong><%=numeral(data.KPU.progress.total).format(0.0)%></strong>
+        <br>
+        <strong><%= parseFloat((kppcakupan/data.KPU.progress.total)*100).toPrecision(4)%> % dari data KPU</strong>
+      </td>
+      <!-- ->kawal pilpres
+
+      <!--->
       <td class="tg-khjd">
         <%=numeral(data.KPU.chart[21]).format(0,0)%>
           <br>
@@ -148,7 +181,35 @@
                       </div><small><strong><%= progress %>% </strong> estimasi tps terproses</small>
 
                     </td>
+                    <%var suara_onno_1 = data.KP_ONNO[parseInt(KP[0])][ 'jokowi_amin']; var suara_onno_2 = data.KP_ONNO[parseInt(KP[0])]['prabowo_sandi'] %>
+                    <%if(suara_onno_1>suara_onno_2){%>
+                    <td class="tg-0lax" style="background:#d4edda; font-weight:bold">
+                      <%}else{%>
+                          <td class="tg-0lax">
+                        <%}%>
+                      <strong><%= numeral(data.KP_ONNO[parseInt(KP[0])]['jokowi_amin']).format(0.0)%> <strong>
+                    </td>
 
+                    <%if(suara_onno_1<suara_onno_2){%>
+                    <td class="tg-0lax" style="background:#d4edda; font-weight:bold">
+                      <%}else{%>
+                          <td class="tg-0lax">
+                        <%}%>
+                      <strong><%= numeral(data.KP_ONNO[parseInt(KP[0])]['prabowo_sandi']).format(0.0)%> <strong>
+                    </td>
+
+
+                    <td class="tg-0lax">
+                      <strong><%= numeral(data.KP_ONNO[parseInt(KP[0])]['prabowo_sandi']+data.KP_ONNO[parseInt(KP[0])]['jokowi_amin']).format(0.0)%> <strong>
+                    </td>
+                    <td class="tg-0lax">
+                        <strong><%= numeral(data.KP_ONNO[parseInt(KP[0])]['tps_masuk']).format(0.0)%> <strong> dari <strong><%=numeral(KP[2]).format(0.0)%></strong>
+                      <div class="progress">
+                        <%var progressOnno =parseFloat((parseFloat(data.KP_ONNO[parseInt(KP[0])]['tps_masuk'])/parseInt(KP[2]))*100).toPrecision(4)%>
+                          <%var classing = progressOnno>50?'bg-success':'bg-warning'%>
+                            <div class="progress-bar <%=classing%>" role="progressbar" style="width: <%=progressOnno%>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="<%=parseInt(KP[2])%>"></div>
+                      </div><small><strong><%= progressOnno %>% </strong> estimasi tps terproses</small>
+                    </td>
                     <%if(suaraKPU1>suaraKPU2){%>
                       <td class="tg-0lax" style="background:#d4edda; font-weight:bold">
                         <%}else{%>
