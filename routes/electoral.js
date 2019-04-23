@@ -7,14 +7,16 @@ const request = require('request');
 const numeral = require('numeral');
 const async = require('async');
 const DAPIL_STATIC = require('../static/dapil');
-
+const PARTAI_STATIC = require('../static/partai');
 router.get('/', calculate);
 router.get('/dapil', generatedapil);
-
+router.get('/partai', generatePartai);
 function generatedapil(req, res) {
   res.json(DAPIL_STATIC);
 }
-
+function generatePartai(req,res){
+  res.json(PARTAI_STATIC);
+}
 function calculate(req, res) {
   res.render('electoral', {
     title: 'Simulasi Perolehan Kursi Legislatif'
