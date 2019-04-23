@@ -80,13 +80,13 @@
 
       <% for(var i=0;i<hasil_sorted.length;i++){%>
         <tr>
-          <td>
+          <td style="background:<%=data.PARTAI[hasil_sorted[i].key]['warna']%>; color:#ccc">
             <%=data.PARTAI[hasil_sorted[i].key]['nama']%>
           </td>
           <td>
             <%=hasil_sorted[i].count%>
           </td>
-          <td style="background:<%=data.PARTAI[hasil_sorted[i].key]['warna']%>; color:#ccc">
+          <td >
             <%=numeral(parseInt(hasil_sorted[i].chair.length)).format(0.0)%> (
               <%=hasil_sorted[i].chair%>)
           </td>
