@@ -45,7 +45,7 @@ function drawChartKPJS(pas1, pas2) {
       backgroundColor: ['#d4edda', '#f8d7da'],
       borderColor: "rgba(255,99,132,1)",
       borderWidth: 0,
-      data: [parseFloat(pas1 / (pas2 + pas1)).toFixed(2) * 100, parseFloat(pas2 / (pas2 + pas1)).toFixed(2) * 100],
+      data: [parseFloat((pas1 / (pas1 + pas2)) * 100).toFixed(2), parseFloat((pas2 / (pas2 + pas1)) * 100).toFixed(2)],
     }]
   };
   var option = {
