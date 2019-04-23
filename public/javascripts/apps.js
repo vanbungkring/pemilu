@@ -18,6 +18,7 @@ new Vue({
       .then(function(response) {
         var vm = this
         drawChartKPU(response.data.data.KPU.chart['21'], response.data.data.KPU.chart['22']);
+        drawChartKPP(response.data.kpp1,response.data.kpp2)
         drawChartKPJS(response.data.kpjs1, response.data.kpjs2);
         var a = response;
         console.log(a);
@@ -33,6 +34,39 @@ new Vue({
   }
 })
 
+function drawChartKPP(pas1, pas2) {
+
+
+  var canvas = document.getElementById('KPP');
+  var data = {
+
+    labels: ["JOKOWI-AMIN", "PRABOWO SANDI"],
+    datasets: [{
+      label: "Kawal Pemilu",
+      backgroundColor: ['#28a745', '#dc3545'],
+      borderWidth: 0,
+      data: [parseFloat((pas1 / (pas1 + pas2)) * 100).toFixed(2), parseFloat((pas2 / (pas2 + pas1)) * 100).toFixed(2)],
+    }]
+  };
+  var option = {
+    type: 'pie',
+    scales: {
+      yAxes: [{
+        stacked: true,
+        gridLines: {
+          display: false,
+          color: "rgba(255,99,132,0.2)"
+        }
+      }],
+
+    }
+  };
+
+  var myBarChart = new Chart(canvas, {
+    type: 'pie',
+    data: data,
+  });
+}
 function drawChartKPJS(pas1, pas2) {
 
 

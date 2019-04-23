@@ -25,8 +25,8 @@
 </style>
 
 <body>
-  <h1>Hasil Tabulasi Realtime Jaga suara 2019 (Kawal Pemilu dan KPU)</h1>
-  <p>Situs ini mengagregasi Suara dari 2 sumber yaitu kawalpemilu dan situs resmi KPU
+  <h1>Hasil Tabulasi Realtime Jaga suara 2019 (Kawal Pemilu,Kawal Pilpres KPU)</h1>
+  <p>Situs ini mengagregasi Suara dari 3 sumber yaitu kawalpemilu.org kawalpilpres2019 dan situs resmi KPU
   </p>
   <div class="alert alert-success">
     <p><a href="https://kawalpemilu.org/disclaimer/" target="_blank" style="color:black; text-decoration: none">
@@ -45,16 +45,18 @@
   <div class="container-fluid">
     <div class="row">
       <br>
-      <div class="col-md-6"><canvas id="KPJS"></canvas> </br>
+      <div class="col-md-4"><canvas id="KPJS"></canvas> <a href = "https://kawalpemilu.org/"><h2 class="text-center">Kawal Pemilu</h1></a></br>
       </div>
-      <div class="col-md-6"><canvas id="KPU"></canvas></div>
+      <div class="col-md-4"><canvas id="KPP"></canvas> <a href ="https://pantau.kawalpilpres2019.id"><h2 class="text-center">Kawal Pilpres</h1></a></br>
+      </div>
+      <div class="col-md-4"><canvas id="KPU"></canvas> <a href ="https://kpu.go.id"><h2 class="text-center">Komisi Pemilihan Umum</h1></a></div>
     </div>
   </div>
   </div>
   <table class="table table-bordered table-md" id="app">
     <tr style="background:#000;color:#fff;text-align:center;vertical-align:top">
       <th class="tg-wy7m" colspan="2">Nama Wilayah</th>
-      <th class="tg-s9og" colspan="4">Kawal Pemilu Jaga Suara</th>
+      <th class="tg-s9og" colspan="4">Kawal Pemilu </th>
       <th class="tg-s9og" colspan="4">Kawal Pilpres</th>
       <th class="tg-1sci" colspan="3">Komisi Pemilihan Umum</th>
     </tr>
