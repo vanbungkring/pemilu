@@ -48,10 +48,6 @@ function render(results, res) {
 function getInformation(req, res) {
   current_page = req.params.id ? req.params.id : 0;
   var KPU_URL = 'https://pemilu2019.kpu.go.id/static/json/hhcw/ppwp.json'
-  if (current_page > 0) {
-    KPU_URL = 'https://pemilu2019.kpu.go.id/static/json/hhcw/ppwp/' + current_page + '.json'
-  }
-  console.log(KPU_URL);
   async.parallel({
       KP: function(callback) {
         request('https://kawal-c1.appspot.com/api/c/' + current_page + '?' + new Date().getTime(), {
@@ -79,7 +75,7 @@ function getInformation(req, res) {
       }
     },
     function(err, results) {
-      client.setex(current_page, 300, JSON.stringify(results));
+      client.setex(current_page, 40, JSON.stringify(results));
       render(results, res);
     });
 }
