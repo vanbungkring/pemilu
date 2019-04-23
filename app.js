@@ -7,7 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var legislatif = require('./routes/electoral');
-
+var visual = require('./routes/visual');
 var app = express();
 
 // view engine setup
@@ -23,6 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/visual', visual);
 app.use('/dapil3', usersRouter);
 app.use('/legislatif/', legislatif);
 // catch 404 and forward to error handler

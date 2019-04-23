@@ -1,11 +1,11 @@
 new Vue({
   el: '#app',
-  data () {
+  data() {
     return {
       kpu: [],
       kp: [],
-      kpjs_total_suara_pas1:0,
-      cakupan:0
+      kpjs_total_suara_pas1: 0,
+      cakupan: 0
     }
   },
 
@@ -18,7 +18,7 @@ new Vue({
       .then(function(response) {
         var vm = this
         drawChartKPU(response.data.data.KPU.chart['21'], response.data.data.KPU.chart['22']);
-        drawChartKPP(response.data.kpp1,response.data.kpp2)
+        drawChartKPP(response.data.kpp1, response.data.kpp2)
         drawChartKPJS(response.data.kpjs1, response.data.kpjs2);
         var a = response;
         console.log(a);
@@ -49,7 +49,7 @@ function drawChartKPP(pas1, pas2) {
     }]
   };
   var option = {
-    type: 'pie',
+    type: 'bar',
     scales: {
       yAxes: [{
         stacked: true,
@@ -67,6 +67,7 @@ function drawChartKPP(pas1, pas2) {
     data: data,
   });
 }
+
 function drawChartKPJS(pas1, pas2) {
 
 
@@ -82,7 +83,7 @@ function drawChartKPJS(pas1, pas2) {
     }]
   };
   var option = {
-    type: 'pie',
+    type: 'bar',
     scales: {
       yAxes: [{
         stacked: true,
@@ -114,7 +115,7 @@ function drawChartKPU(pas1, pas2) {
     }]
   };
   var option = {
-    type: 'pie',
+    type: 'bar',
     scales: {
       yAxes: [{
         stacked: true,

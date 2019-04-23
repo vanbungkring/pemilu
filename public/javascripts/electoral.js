@@ -10,7 +10,7 @@ var app = new Vue({
       dapil: null,
       series: [{
         name: 'Perolehan Suara',
-        data: [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2, 2.3, 1.4, 0.8, 0.5, 0.2]
+        data: []
       }],
       chartOptions: {
         chart: {
@@ -37,7 +37,7 @@ var app = new Vue({
         },
 
         xaxis: {
-          categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          categories:  ["PKB", "Gerindra", "PDIP", "Golkar", "NasDem", "Garuda", "Berkarya", "PKS", "Perindo", "PPP", "PSI", "PAN", "Hanura", "Demokrat", "PA", "Partai SIRA", "PD Aceh", "PNA", "PBB", "PKPI"],
           position: 'bottom',
           labels: {
             offsetY: -18,
@@ -111,15 +111,19 @@ var app = new Vue({
     axios
       .get('/legislatif/partai')
       .then(response => {
-        this.info = response.data
-        for (var i = 0; i < response.data.length; i++) {
-          console.log(response.data[i])
-        }
+
         var partai = [];
         var warna = [];
+        for (var i = 0; i < Object.values(response.data).length; i++) {
+          partai.push( Object.values(response.data)[i]['nama']);
+          warna.push(i);
+        }
+        this.chartOptions['xaxis']['categories'] = partai;
+        this.info = response.data
+        this.series[0]['data'] = warna;
+        console.log(partai);
       })
       .catch(error => {
-        console.log(error)
         this.errored = true
       })
       .finally(() => this.loading = false)

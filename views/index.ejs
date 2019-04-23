@@ -25,35 +25,51 @@
 </style>
 
 <body>
-  <h1>Hasil Tabulasi Realtime Jaga suara 2019 (Kawal Pemilu,Kawal Pilpres KPU)</h1>
-  <p>Situs ini mengagregasi Suara dari 3 sumber yaitu kawalpemilu.org kawalpilpres2019 dan situs resmi KPU
-  </p>
-  <div class="alert alert-success">
-    <p><a href="https://kawalpemilu.org/disclaimer/" target="_blank" style="color:black; text-decoration: none">
-          Semua informasi di Kolom Kawal Pemilu dipublikasikan dengan itikad
-          baik dan hanya untuk tujuan informasi bagi publik dan
-          <strong>bukan merupakan hasil resmi</strong> dari penyelenggara Pemilu.
-          Pengumpulan dan penginputan data pada situs ini dilakukan dengan cara
-          <em>crowd sourcing</em> atau gotong royong.</a> Untuk Hasil KPU ada kolom di sebelah Kanan
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="#">mas-madmad</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Beranda <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://kawalpemilu.org">Kawal Pemilu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://kawalpilpres2019.id">Kawal Pilpres 2019</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://kpu.go.id">Komisi Pemilihan Umum</a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+  <div class="container-fluid" style="margin-top:40px">
+    <h1>Hasil Tabulasi Realtime Jaga suara 2019 (Kawal Pemilu,Kawal Pilpres KPU)</h1>
+    <p>Situs ini mengagregasi Suara dari 3 sumber yaitu kawalpemilu.org kawalpilpres2019 dan situs resmi KPU
     </p>
-  </div>
-  <div class="alert alert-danger">
-    <p>Semua table informasi di bawah ini merupakan kurasi dari situs kawalpemilu,kawalpilpres2019 dan Official Resmi Dari KPU, <strong>dan untuk Data pada halaman ini masih belum final dan akan terus diperbarui secara berkala!</strong>
-    </p>
-    <h5>Latest Update: <%=data.KPU.ts%></h5>
-  </div>
-  <div class="container-fluid">
-    <div class="row">
-      <br>
-      <div class="col-md-4"><canvas id="KPJS"></canvas> <a href = "https://kawalpemilu.org/"><h2 class="text-center">Kawal Pemilu</h1></a></br>
+    <div class="alert alert-danger">
+      <p>Semua table informasi di bawah ini merupakan kurasi dari situs kawalpemilu,kawalpilpres2019 dan Official Resmi Dari KPU, <strong>dan untuk Data pada halaman ini masih belum final dan akan terus diperbarui secara berkala!</strong>
+      </p>
+      <h5>Latest Update: <%=data.KPU.ts%></h5>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <br>
+        <div class="col-md-4"><canvas id="KPJS"></canvas> <a href="https://kawalpemilu.org/"><h2 class="text-center">Kawal Pemilu</h1></a></br>
+        </div>
+        <div class="col-md-4"><canvas id="KPP"></canvas> <a href="https://pantau.kawalpilpres2019.id"><h2 class="text-center">Kawal Pilpres</h1></a></br>
+        </div>
+        <div class="col-md-4"><canvas id="KPU"></canvas> <a href="https://kpu.go.id"><h2 class="text-center">Komisi Pemilihan Umum</h1></a></div>
       </div>
-      <div class="col-md-4"><canvas id="KPP"></canvas> <a href ="https://pantau.kawalpilpres2019.id"><h2 class="text-center">Kawal Pilpres</h1></a></br>
-      </div>
-      <div class="col-md-4"><canvas id="KPU"></canvas> <a href ="https://kpu.go.id"><h2 class="text-center">Komisi Pemilihan Umum</h1></a></div>
     </div>
   </div>
-  </div>
-  <table class="table table-bordered table-md" id="app">
+  <table class="table table-bordered table-sm" id="app">
     <tr style="background:#000;color:#fff;text-align:center;vertical-align:top">
       <th class="tg-wy7m" colspan="2">Nama Wilayah</th>
       <th class="tg-s9og" colspan="4">Kawal Pemilu </th>
@@ -184,12 +200,12 @@
 
                     </td>
                     <%var suara_onno_1 = data.KP_ONNO[parseInt(KP[0])][ 'jokowi_amin']; var suara_onno_2 = data.KP_ONNO[parseInt(KP[0])]['prabowo_sandi'] %>
-                    <%if(suara_onno_1>suara_onno_2){%>
-                    <td class="tg-0lax" style="background:#d4edda; font-weight:bold">
-                      <%}else{%>
-                          <td class="tg-0lax">
-                        <%}%>
-                      <strong><%= numeral(data.KP_ONNO[parseInt(KP[0])]['jokowi_amin']).format(0.0)%> <strong>
+                      <%if(suara_onno_1>suara_onno_2){%>
+                        <td class="tg-0lax" style="background:#d4edda; font-weight:bold">
+                          <%}else{%>
+                            <td class="tg-0lax">
+                              <%}%>
+                                <strong><%= numeral(data.KP_ONNO[parseInt(KP[0])]['jokowi_amin']).format(0.0)%> <strong>
                     </td>
 
                     <%if(suara_onno_1<suara_onno_2){%>
@@ -206,29 +222,29 @@
                     </td>
                     <td class="tg-0lax">
                         <strong><%= numeral(data.KP_ONNO[parseInt(KP[0])]['tps_masuk']).format(0.0)%> <strong> dari <strong><%=numeral(KP[2]).format(0.0)%></strong>
-                      <div class="progress">
-                        <%var progressOnno =parseFloat((parseFloat(data.KP_ONNO[parseInt(KP[0])]['tps_masuk'])/parseInt(KP[2]))*100).toPrecision(4)%>
-                          <%var classing = progressOnno>50?'bg-success':'bg-warning'%>
-                            <div class="progress-bar <%=classing%>" role="progressbar" style="width: <%=progressOnno%>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="<%=parseInt(KP[2])%>"></div>
-                      </div><small><strong><%= progressOnno %>% </strong> estimasi tps terproses</small>
-                    </td>
-                    <%if(suaraKPU1>suaraKPU2){%>
-                      <td class="tg-0lax" style="background:#d4edda; font-weight:bold">
-                        <%}else{%>
-                          <td class="tg-0lax">
-                            <%}%>
-                              <%=numeral(data.KPU.table[parseInt(KP[0])]['21']).format(0,0)%>
-                          </td>
-                          <%if(suaraKPU1<suaraKPU2){%>
-                            <td class="tg-0lax" style="background:#d4edda; font-weight:bold">
-                              <%}else{%>
-                                <td class="tg-0lax">
-                                  <%}%>
-                                    <%=numeral(data.KPU.table[parseInt(KP[0])]['22']).format(0,0)%>
-                                </td>
-                                <td class="tg-0lax">
-                                  <%=numeral(parseInt(data.KPU.table[parseInt(KP[0])]['21'])+parseInt(data.KPU.table[parseInt(KP[0])]['22'])).format(0,0)%>
-                                </td>
+                                <div class="progress">
+                                  <%var progressOnno =parseFloat((parseFloat(data.KP_ONNO[parseInt(KP[0])]['tps_masuk'])/parseInt(KP[2]))*100).toPrecision(4)%>
+                                    <%var classing = progressOnno>50?'bg-success':'bg-warning'%>
+                                      <div class="progress-bar <%=classing%>" role="progressbar" style="width: <%=progressOnno%>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="<%=parseInt(KP[2])%>"></div>
+                                </div><small><strong><%= progressOnno %>% </strong> estimasi tps terproses</small>
+                            </td>
+                            <%if(suaraKPU1>suaraKPU2){%>
+                              <td class="tg-0lax" style="background:#d4edda; font-weight:bold">
+                                <%}else{%>
+                                  <td class="tg-0lax">
+                                    <%}%>
+                                      <%=numeral(data.KPU.table[parseInt(KP[0])]['21']).format(0,0)%>
+                                  </td>
+                                  <%if(suaraKPU1<suaraKPU2){%>
+                                    <td class="tg-0lax" style="background:#d4edda; font-weight:bold">
+                                      <%}else{%>
+                                        <td class="tg-0lax">
+                                          <%}%>
+                                            <%=numeral(data.KPU.table[parseInt(KP[0])]['22']).format(0,0)%>
+                                        </td>
+                                        <td class="tg-0lax">
+                                          <%=numeral(parseInt(data.KPU.table[parseInt(KP[0])]['21'])+parseInt(data.KPU.table[parseInt(KP[0])]['22'])).format(0,0)%>
+                                        </td>
       </tr>
 
       <%})%>
@@ -237,21 +253,16 @@
   <ul>
     <li>Data diatas bersifat sementara selama masa perhitungan suara pemilu</li>
     <li>
-          <p>
-            <span class="th">#TPS terproses</span> berisi
-            <strong>ESTIMASI</strong> jumlah TPS yang sudah memiliki foto dan
-            sudah diproses datanya. Kami hanya dapat menampilkan angka
-            estimasi karena satu TPS yang sama memiliki beberapa foto dimana
-            sebagian sudah diproses dan sebagian lain belum diproses.
-          </p>
-          <p>
-            Kawal Pemilu menerima lebih dari satu foto per TPS selain untuk
-            mendapatkan bukti foto pendukung, juga karena Kawal Pemilu
-            menerima dan memproses foto terkait pemilu DPR, DPD, DPRD
-            Provinsi, dan DPRD Kabupaten/Kota.
-          </p>
-        </li>
+      <p>
+        <span class="th">#TPS terproses</span> berisi
+        <strong>ESTIMASI</strong> jumlah TPS yang sudah memiliki foto dan sudah diproses datanya. Kami hanya dapat menampilkan angka estimasi karena satu TPS yang sama memiliki beberapa foto dimana sebagian sudah diproses dan sebagian lain belum diproses.
+      </p>
+      <p>
+        Kawal Pemilu menerima lebih dari satu foto per TPS selain untuk mendapatkan bukti foto pendukung, juga karena Kawal Pemilu menerima dan memproses foto terkait pemilu DPR, DPD, DPRD Provinsi, dan DPRD Kabupaten/Kota.
+      </p>
+    </li>
   </ul>
+  </div>
 </body>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-138792337-1"></script>

@@ -24,17 +24,17 @@
           <thead>
             <tr>
               <th scope="col">
-                <small>Wilayah</small>
+                <small><strong>Wilayah</strong></small>
               </th>
               <th scope="col" v-for="key,value in info" v-if="!key.is_aceh">
-                <small v-if='!key.is_aceh'>{{key.nama}}</small>
+                <small v-if='!key.is_aceh'><strong>{{key.nama}}</strong></small>
               </th>
 
             </tr>
           </thead>
           <tbody>
             <tr v-for="dapilKey,dapilValue in dapil">
-              <th scope="row">{{dapilKey.nama}}</th>
+              <th scope="row"> <small><strong>{{dapilKey.nama}}</strong></small></th>
               <th scope="col" v-for="partaiKey,partaiValue in info" v-if="!partaiKey.is_aceh">
                 <small v-if='!partaiKey.is_aceh'>{{hasil.table[dapilValue][partaiValue]}}</small>
               </th>
