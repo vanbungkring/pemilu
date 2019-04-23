@@ -21,30 +21,21 @@
           <thead>
             <tr>
               <th scope="col">
-                <small>Nama Partai</small>
+                <small>Wilayah</small>
               </th>
-              <th scope="col">
-                <small>Perolehan Suara Sah</small>
+              <th scope="col" v-for="key,value in info" v-if="!key.is_aceh">
+                <small v-if='!key.is_aceh'>{{key.nama}}</small>
               </th>
-              <th scope="col">
-                <small>Perolehan Kursi</small>
-              </th>
-              <!-- <th scope="col" v-for="key,value in info">
-                <small>{{key.nama}}</small>
-              </th> -->
 
             </tr>
           </thead>
           <tbody>
-            <!-- <th scope="col" v-for="key,value in info">
-              <small>{{key.nama}}</small>
-            </th> -->
-            <tr scope="col" v-for="key,value in info">
-              <th scope="row">{{key.nama}}</th>
-              <td>Mark</td>
-              <td>Otto</td>
+            <tr v-for="dapilKey,dapilValue in dapil">
+              <th scope="row">{{dapilKey.nama}}</th>
+              <th scope="col" v-for="partaiKey,partaiValue in info" v-if="!partaiKey.is_aceh">
+                <small v-if='!partaiKey.is_aceh'>{{hasil.table[dapilValue][partaiValue]}}</small>
+              </th>
             </tr>
-
           </tbody>
         </table>
       </div>

@@ -10,13 +10,31 @@ const DAPIL_STATIC = require('../static/dapil');
 const PARTAI_STATIC = require('../static/partai');
 router.get('/', calculate);
 router.get('/dapil', generatedapil);
+router.get('/hasil', generateHasil);
 router.get('/partai', generatePartai);
+
 function generatedapil(req, res) {
   res.json(DAPIL_STATIC);
 }
-function generatePartai(req,res){
+
+function generatePartai(req, res) {
   res.json(PARTAI_STATIC);
 }
+
+function generateHasil(req, res) {
+  request(HASIL, {
+    json: true,
+    strictSSL: false
+  }, (err, response, body) => {
+    if (err) {
+      res.json(err)
+    } else {
+      console.log(body);
+      res.json(body)
+    }
+  });
+}
+
 function calculate(req, res) {
   res.render('electoral', {
     title: 'Simulasi Perolehan Kursi Legislatif'
