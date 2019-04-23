@@ -1,5 +1,14 @@
 new Vue({
-  el: '#table',
+  el: '#app',
+  data () {
+    return {
+      kpu: [],
+      kp: [],
+      kpjs_total_suara_pas1:0,
+      cakupan:0
+    }
+  },
+
   mounted() {
     axios.get('/', {
         params: {
@@ -7,16 +16,20 @@ new Vue({
         }
       })
       .then(function(response) {
-        this.kpjs_total_suara_pas1 = response.data.kpjs1;
+        var vm = this
         drawChartKPU(response.data.data.KPU.chart['21'], response.data.data.KPU.chart['22']);
         drawChartKPJS(response.data.kpjs1, response.data.kpjs2);
+        var a = response;
+        console.log(a);
+        vm.kpu = response.data.data.KPU;
+        vm.kp = response.data.data.KP
+        vm.cakupan = response.data.total_cakupan
+        vm.kpjs_total_suara_pas1 = response.data.kpjs1;
       })
       .catch(function(error) {
         console.log(error);
       })
-      .then(function() {
-
-      });
+      .then(function() {});
   }
 })
 

@@ -13,11 +13,9 @@
   <meta property="og:url" content="https://pemilu.masmadmad.com" />
   <meta property="og:description" content="#Bandingkan , antara kawal pemilu x komisi pemilihan umum, Mari gotong royong, Pantau pemilu - Jaga Suara 2019" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
 </head>
 <style media="screen">
   table {
@@ -26,11 +24,11 @@
   }
 </style>
 
-<body >
+<body>
   <h1>Hasil Tabulasi Realtime Jaga suara 2019 (Kawal Pemilu dan KPU)</h1>
   <p>Situs ini mengagregasi Suara dari 2 sumber yaitu kawalpemilu dan situs resmi KPU
   </p>
-  <div class="alert alert-success" id="app">
+  <div class="alert alert-success" >
     <p><a href="https://kawalpemilu.org/disclaimer/" target="_blank" style="color:black; text-decoration: none">
           Semua informasi di Kolom Kawal Pemilu dipublikasikan dengan itikad
           baik dan hanya untuk tujuan informasi bagi publik dan
@@ -53,7 +51,7 @@
     </div>
   </div>
   </div>
-  <table class="table table-bordered table-md" id="table">
+  <table class="table table-bordered table-md" id="app">
     <tr style="background:#000;color:#fff;text-align:center;vertical-align:top">
       <th class="tg-wy7m" colspan="2">Nama Wilayah</th>
       <th class="tg-s9og" colspan="4">Kawal Pemilu Jaga Suara</th>
@@ -89,17 +87,11 @@
         <%=numeral(kpjs1+kpjs2).format(0,0)%>
       </td>
       <td class="tg-khjd">
-        <%=numeral(total_cakupan).format(0.0)%> dari
-          <%=numeral(data.KPU.progress.total).format(0.0)%>
+        <strong><%=numeral(total_cakupan).format(0.0)%> </strong>dari
+          <strong><%=numeral(data.KPU.progress.total).format(0.0)%></strong>
             <br>
             <strong><%= parseFloat((total_cakupan/data.KPU.progress.total)*100).toPrecision(4)%> % dari data KPU</strong>
       </td>
-      <script>
-        var suaraKPU1 = <%=data.KPU.chart[21]%>
-        var suaraKPU2 = <%=data.KPU.chart[22]%>
-        var suaraKPJS1 = <%=kpjs1%>
-        var suaraKPJS2 = <%=kpjs2%>
-      </script>
       <td class="tg-khjd">
         <%=numeral(data.KPU.chart[21]).format(0,0)%>
           <br>
@@ -148,10 +140,12 @@
 
                             </td>
                             <td class="tg-0lax">
-                              <%=numeral(data.KP.data[parseInt(KP[0])]['sum']['cakupan']).format(0,0) %> dari <%=numeral(KP[2]).format(0.0)%>
+                              <strong><%=numeral(data.KP.data[parseInt(KP[0])]['sum']['cakupan']).format(0,0) %></strong> dari <strong><%=numeral(KP[2]).format(0.0)%></strong>
                               <div class="progress">
-    <div class="progress-bar bg-success" role="progressbar" style="width: <%=parseFloat(parseFloat(data.KP.data[parseInt(KP[0])]['sum']['cakupan'])/parseInt(KP[2]))*100%>%"aria-valuenow="25" aria-valuemin="0" aria-valuemax="<%=parseInt(KP[2])%>"></div>
-  </div><small>Estimasi TPS yang sudah di proses oleh Kawal Pemilu</small>
+                                <%var progress =parseFloat((parseFloat(data.KP.data[parseInt(KP[0])]['sum']['cakupan'])/parseInt(KP[2]))*100).toPrecision(4)%>
+                                <%var classing = progress>50?'bg-success':'bg-warning'%>
+    <div class="progress-bar <%=classing%>" role="progressbar" style="width: <%=progress%>%"aria-valuenow="25" aria-valuemin="0" aria-valuemax="<%=parseInt(KP[2])%>"></div>
+  </div><small><strong><%= progress %>% </strong> estimasi tps terproses</small>
 
                             </td>
 
@@ -178,10 +172,14 @@
   </table>
   <h1>Catatan</h1>
 </body>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script src="/javascripts/apps.js"></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-138792337-1"></script>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-138792337-1"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="/javascripts/apps.js"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
