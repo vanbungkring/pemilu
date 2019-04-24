@@ -8,6 +8,7 @@
   <script src='https://static-assets.mapbox.com/gl-pricing/dist/mapbox-gl.js'></script>
   <link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
   <!-- Bootstrap CSS -->
+  <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script type='text/javascript' src='https://www.google.com/jsapi'></script>
   <script type='text/javascript'>
@@ -15,166 +16,194 @@
       'packages': ['geochart']
     });
     google.setOnLoadCallback(fetchAPI);
-    function fetchAPI(){
-      drawRegionsMap()
+    var intlCode = [
+      [{
+        f: 'Aceh',
+        v: 'ID-AC'
+      }, 10],
+      [{
+        f: 'Bali',
+        v: 'ID-BA'
+      }, 7],
+      [{
+        f: 'KEPULAUAN BANGKA BELITUNG',
+        v: 'ID-BB'
+      }, 2],
+      [{
+        f: 'Banten',
+        v: 'ID-BT'
+      }, 6],
+      [{
+        f: 'Bengkulu',
+        v: 'ID-BE'
+      }, 2],
+      [{
+        f: 'Gorontalo',
+        v: 'ID-GO'
+      }, 8],
+      [{
+        f: 'Jambi',
+        v: 'ID-JA'
+      }, 1],
+      [{
+        f: 'Jawa Barat',
+        v: 'ID-JB'
+      }, 5],
+      [{
+        f: 'Jawa Tengah',
+        v: 'ID-JT'
+      }, 5],
+      [{
+        f: 'Jawa Timur',
+        v: 'ID-JI'
+      }, 3],
+      [{
+        f: 'Kalimantan Barat',
+        v: 'ID-KB'
+      }, 2],
+      [{
+        f: 'Kalimantan Selatan',
+        v: 'ID-KS'
+      }, 4],
+      [{
+        f: 'Kalimantan Tengah',
+        v: 'ID-KT'
+      }, 4],
+      [{
+        f: 'Kalimantan Timur',
+        v: 'ID-KI'
+      }, 10],
+      [{
+        f: 'Kalimantan Utara',
+        v: 'ID-KU'
+      }, 1],
+      [{
+        f: 'Kepulauan Riau',
+        v: 'ID-KR'
+      }, 5],
+      [{
+        f: 'Lampung',
+        v: 'ID-LA'
+      }, 8],
+      [{
+        f: 'Maluku',
+        v: 'ID-MA'
+      }, 7],
+      [{
+        f: 'Maluku Utara',
+        v: 'ID-MU'
+      }, 3],
+      [{
+        f: 'Nusa Tenggara Barat',
+        v: 'ID-NB'
+      }, 4],
+      [{
+        f: 'Nusa Tenggara Timur',
+        v: 'ID-NT'
+      }, 8],
+      [{
+        f: 'Papua',
+        v: 'ID-PA'
+      }, 6],
+      [{
+        f: 'Papua Barat',
+        v: 'ID-PB'
+      }, 5],
+      [{
+        f: 'Riau',
+        v: 'ID-RI'
+      }, 3],
+      [{
+        f: 'Sulawesi Barat',
+        v: 'ID-SR'
+      }, 5],
+      [{
+        f: 'Sulawesi Selatan',
+        v: 'ID-SN'
+      }, 4],
+      [{
+        f: 'Sulawesi Tengah',
+        v: 'ID-ST'
+      }, 8],
+      [{
+        f: 'Sulawesi Tenggara',
+        v: 'ID-SG'
+      }, 1],
+      [{
+        f: 'Sulawesi Utara',
+        v: 'ID-SA'
+      }, 10],
+      [{
+        f: 'Sumatera Barat',
+        v: 'ID-SB'
+      }, 3],
+      [{
+        f: 'Sumatera Selatan',
+        v: 'ID-SS'
+      }, 10],
+      [{
+        f: 'Sumatera Utara',
+        v: 'ID-SU'
+      }, 9],
+      [{
+        f: 'Dki Jakarta',
+        v: 'ID-JK'
+      }, 10],
+      [{
+        f: 'DAERAH ISTIMEWA YOGYAKARTA',
+        v: 'ID-YO'
+      }, 2]
+    ];
+
+    var dataSourceKPU = [];
+    var dataSourceKP = [];
+    var dataSourceKPP = [];
+
+    function fetchAPI() {
+      $.get('/?type=json', // url
+        function(data, textStatus, jqXHR) { // success callback
+          ///do clean data
+          for (var i = 0; i < intlCode.length; i++) {
+            var source = intlCode[i][0]['f']
+            for (var j = 0; j < data.data.KP.children.length; j++) {
+              var now = data.data.KP.children[j][1];
+              if (now.toLowerCase() === source.toLowerCase()) {
+                data.data.KP.children[j].push(intlCode[i][0]['v'])
+              }
+            }
+          }
+          for (var i = 0; i < data.data.KP.children.length; i++) {
+            var key = data.data.KP.children[i][0];
+            var arraySourceKP = [];
+            data.data.KP.data[key]['sum']['pas1']
+            arraySourceKP.push({'f':data.data.KP.children[i][1],'v':data.data.KP.children[i][5]},parseInt(data.data.KP.data[key]['sum']['pas1'])>parseInt(data.data.KP.data[key]['sum']['pas2'])?1:2);
+            dataSourceKP.push(arraySourceKP);
+          }
+          drawRegionsMap(dataSourceKP);
+        });
     }
-    function drawRegionsMap() {
+
+    function drawRegionsMap(source) {
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Country');
-      data.addColumn('number', 'Popularity');
-      data.addRows([
-        [{
-          f: 'Aceh',
-          v: 'ID-AC'
-        }, 10],
-        [{
-          f: 'Bali',
-          v: 'ID-BA'
-        }, 7],
-        [{
-          f: 'Bangka Belitung',
-          v: 'ID-BB'
-        }, 2],
-        [{
-          f: 'Banten',
-          v: 'ID-BT'
-        }, 6],
-        [{
-          f: 'Bengkulu',
-          v: 'ID-BE'
-        }, 2],
-        [{
-          f: 'Gorontalo',
-          v: 'ID-GO'
-        }, 8],
-        [{
-          f: 'Jambi',
-          v: 'ID-JA'
-        }, 1],
-        [{
-          f: 'Jawa Barat',
-          v: 'ID-JB'
-        }, 5],
-        [{
-          f: 'Jawa Tengah',
-          v: 'ID-JT'
-        }, 5],
-        [{
-          f: 'Jawa Timur',
-          v: 'ID-JI'
-        }, 3],
-        [{
-          f: 'Kalimantan Barat',
-          v: 'ID-KB'
-        }, 2],
-        [{
-          f: 'Kalimantan Selatan',
-          v: 'ID-KS'
-        }, 4],
-        [{
-          f: 'Kalimantan Tengah',
-          v: 'ID-KT'
-        }, 4],
-        [{
-          f: 'Kalimantan Timur',
-          v: 'ID-KI'
-        }, 10],
-        [{
-          f: 'Kalimantan Utara',
-          v: 'ID-KU'
-        }, 1],
-        [{
-          f: 'Kepulauan Riau',
-          v: 'ID-KR'
-        }, 5],
-        [{
-          f: 'Lampung',
-          v: 'ID-LA'
-        }, 8],
-        [{
-          f: 'Maluku',
-          v: 'ID-MA'
-        }, 7],
-        [{
-          f: 'Maluku Utara',
-          v: 'ID-MU'
-        }, 3],
-        [{
-          f: 'Nusa Tenggara Barat',
-          v: 'ID-NB'
-        }, 4],
-        [{
-          f: 'Nusa Tenggara Timur',
-          v: 'ID-NT'
-        }, 8],
-        [{
-          f: 'Papua',
-          v: 'ID-PA'
-        }, 6],
-        [{
-          f: 'Papua Barat',
-          v: 'ID-PB'
-        }, 5],
-        [{
-          f: 'Riau',
-          v: 'ID-RI'
-        }, 3],
-        [{
-          f: 'Sulawesi Barat',
-          v: 'ID-SR'
-        }, 5],
-        [{
-          f: 'Sulawesi Selatan',
-          v: 'ID-SN'
-        }, 4],
-        [{
-          f: 'Sulawesi Tengah',
-          v: 'ID-ST'
-        }, 8],
-        [{
-          f: 'Sulawesi Tenggara',
-          v: 'ID-SG'
-        }, 1],
-        [{
-          f: 'Sulawesi Utara',
-          v: 'ID-SA'
-        }, 10],
-        [{
-          f: 'Sumatera Barat',
-          v: 'ID-SB'
-        }, 3],
-        [{
-          f: 'Sumatera Selatan',
-          v: 'ID-SS'
-        }, 10],
-        [{
-          f: 'Sumatera Utara',
-          v: 'ID-SU'
-        }, 9],
-        [{
-          f: 'Jakarta Raya',
-          v: 'ID-JK'
-        }, 10],
-        [{
-          f: 'Yogyakarta',
-          v: 'ID-YO'
-        }, 2]
-      ]);
+      data.addColumn('number', 'Paslon');
+      data.addRows(source)
 
       var options = {
         'title': 'Map',
-        'width': document.documentElement.clientWidth,
+        'width': document.documentElement.clientWidth - 100,
         'height': 800,
         'region': 'ID',
         'colorAxis': {
-          colors: ['green', 'red']},
-          'resolution': 'provinces'
-        };
-
-        var container = document.getElementById('map_canvas');
-        var geochart = new google.visualization.GeoChart(container);
-        geochart.draw(data, options);
+          colors: ['green', 'red']
+        },
+        'resolution': 'provinces'
       };
+
+      var container = document.getElementById('map_canvas');
+      var geochart = new google.visualization.GeoChart(container);
+      geochart.draw(data, options);
+    };
   </script>
   <title>Visualiasi Data</title>
 </head>
