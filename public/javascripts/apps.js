@@ -43,7 +43,7 @@ function drawChartKPP(pas1, pas2) {
     labels: ["JOKOWI-AMIN", "PRABOWO SANDI"],
     datasets: [{
       label: "Kawal Pemilu",
-      backgroundColor: ['#28a745', '#dc3545'],
+      backgroundColor: ['#dc3545','#28a745'],
       borderWidth: 0,
       data: [parseFloat((pas1 / (pas1 + pas2)) * 100).toFixed(2), parseFloat((pas2 / (pas2 + pas1)) * 100).toFixed(2)],
     }]
@@ -77,7 +77,7 @@ function drawChartKPJS(pas1, pas2) {
     labels: ["JOKOWI-AMIN", "PRABOWO SANDI"],
     datasets: [{
       label: "Kawal Pemilu",
-      backgroundColor: ['#28a745', '#dc3545'],
+      backgroundColor: ['#dc3545','#28a745'],
       borderWidth: 0,
       data: [parseFloat((pas1 / (pas1 + pas2)) * 100).toFixed(2), parseFloat((pas2 / (pas2 + pas1)) * 100).toFixed(2)],
     }]
@@ -108,7 +108,7 @@ function drawChartKPU(pas1, pas2) {
     labels: ["JOKOWI-AMIN", "PRABOWO SANDI"],
     datasets: [{
       label: "Komisi Pemilihan Umum",
-      backgroundColor: ['#28a745', '#dc3545'],
+      backgroundColor: ['#dc3545','#28a745'],
       borderColor: "rgba(255,99,132,1)",
       borderWidth: 0,
       data: [parseFloat((pas1 / (pas1 + pas2)) * 100).toFixed(2), parseFloat((pas2 / (pas2 + pas1)) * 100).toFixed(2)],

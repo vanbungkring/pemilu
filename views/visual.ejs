@@ -162,6 +162,7 @@
     function fetchAPI() {
       $.get('/?type=json', // url
         function(data, textStatus, jqXHR) { // success callback
+          console.log(data);
           ///do clean data
           for (var i = 0; i < intlCode.length; i++) {
             var source = intlCode[i][0]['f']
@@ -175,27 +176,45 @@
           for (var i = 0; i < data.data.KP.children.length; i++) {
             var key = data.data.KP.children[i][0];
             var arraySourceKP = [];
+            var arraySourceKPU = [];
             data.data.KP.data[key]['sum']['pas1']
-            arraySourceKP.push({'f':data.data.KP.children[i][1],'v':data.data.KP.children[i][5]},parseInt(data.data.KP.data[key]['sum']['pas1'])>parseInt(data.data.KP.data[key]['sum']['pas2'])?1:2);
+            arraySourceKP.push({
+              'f': data.data.KP.children[i][1],
+              'v': data.data.KP.children[i][5]
+            }, parseInt(data.data.KP.data[key]['sum']['pas1']) > parseInt(data.data.KP.data[key]['sum']['pas2']) ? 1 : 2);
+            arraySourceKPU.push({
+              'f': data.data.KP.children[i][1],
+              'v': data.data.KP.children[i][5]
+            }, parseInt(data.data.KPU.table[key]['21']) > parseInt(data.data.KPU.table[key]['22']) ? 1 : 2);
+            dataSourceKPU.push(arraySourceKPU);
             dataSourceKP.push(arraySourceKP);
           }
-          drawRegionsMap(dataSourceKP);
+          console.log(dataSourceKPU);
+          drawRegionsMap(dataSourceKPU);
         });
+    }
+
+    function changeDtaSourcetoKP() {
+      drawRegionsMap(dataSourceKP);
+    }
+
+    function changeDtaSourcetoKPU() {
+      drawRegionsMap(dataSourceKPU);
     }
 
     function drawRegionsMap(source) {
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Country');
-      data.addColumn('number', 'Paslon');
+      data.addColumn('number', 'Paslon', 'Jumlah Suara');
       data.addRows(source)
 
       var options = {
         'title': 'Map',
         'width': document.documentElement.clientWidth - 100,
-        'height': 800,
+        'height': 600,
         'region': 'ID',
         'colorAxis': {
-          colors: ['green', 'red']
+          colors: ['red', 'green']
         },
         'resolution': 'provinces'
       };
@@ -233,10 +252,21 @@
 
     </div>
   </nav>
-  <div class="container-fluid" id="app">
+  <div class="container-fluid" id="app" style="margin-top:80px;">
 
     <div class="row">
-      <div id='map_canvas'></div>
+      <div class="col-md-12">
+        <div class="alert alert-danger">
+          <p>Semua table informasi di bawah ini merupakan kurasi dari situs kawalpemilu,kawalpilpres2019 dan Official Resmi Dari KPU, <strong>dan untuk Data pada halaman ini masih belum final dan akan terus diperbarui secara berkala!</strong>
+          </p>
+          <h5>Latest Update: 2019-04-24 07:15:03</h5>
+        </div>
+        <div id='map_canvas'></div>
+      </div>
+        <div class="col-md-12">
+          <button type="button" class="btn btn-primary" onclick="changeDtaSourcetoKP()">KAWAL PEMILU</button>
+          <button type="button" class="btn btn-primary" onclick="changeDtaSourcetoKPU()">KPU</button>
+        </div>
     </div>
   </div>
   <!-- Optional JavaScript -->
