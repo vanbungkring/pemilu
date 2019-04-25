@@ -2,11 +2,11 @@ var express = require('express');
 var router = express.Router();
 var PARTAI = 'https://pemilu2019.kpu.go.id/static/json/partai.json?' + new Date().getTime()
 var DAPIL = 'https://pemilu2019.kpu.go.id/static/json/dapil/dprri.json?' + new Date().getTime()
-var HASIL = 'https://pemilu2019.kpu.go.id/static/json/hhcw/dprri/32676.json'
+var HASIL = 'https://pemilu2019.kpu.go.id/static/json/hhcd/0.json'
 const request = require('request');
 const numeral = require('numeral');
 const async = require('async');
-const DAPIL_STATIC = require('../static/wilayah');
+const DAPIL_STATIC = require('../static/dapil');
 const PARTAI_STATIC = require('../static/partai');
 router.get('/', calculate);
 router.get('/dapil', generatedapil);
