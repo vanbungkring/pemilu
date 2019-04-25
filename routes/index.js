@@ -112,8 +112,12 @@ function render(results, req, res, next) {
   if (is_tps_detail) {
     template = 'tpsDetail';
   }
+  var title = 'Nasional'
+  if (results.KP.name != 'IDN') {
+    title = results.KP.name;
+  }
   res.render(template, {
-    title: 'Detail TPS',
+    title: title,
     data: results,
     kpjs1: kpjs1,
     kpp1: kp_onno_pas1,
