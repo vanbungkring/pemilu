@@ -125,8 +125,7 @@ function render(results, req, res, next) {
     kpp2: kp_onno_pas2,
     kppcakupan: kp_onno_cakupan,
     kpjs2: kpjs2,
-    params: req.query.child ? req.query.child : '',
-    next: req.query.child ? req.query.child : '',
+    next: req.query.child ? JSON.parse(req.query.child) : '',
     total_cakupan: total_cakupan,
     numeral: numeral
   });
