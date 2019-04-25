@@ -22,7 +22,7 @@ function getTPSSummary(req, res) {
     params: req.query.child
   });
 }
-router.get('/', getInformation);
+router.get('/',cached, getInformation);
 
 function cached(req, res, next) {
   var key = '0'
@@ -199,7 +199,7 @@ function getInformation(req, res) {
         if (typeof req.query.child != 'undefined') {
           key = req.query.child
         }
-        client.setex(key, 1600, JSON.stringify(results));
+        client.setex(key, 2600, JSON.stringify(results));
       }
       console.log(results);
       render(results, req, res);
