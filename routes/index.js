@@ -100,7 +100,19 @@ function render2(results, current_page, req, res) {
   if (results.KP.name != 'IDN') {
     title = 'Hasil Real count provinsi ' + results.KP.name;
   }
-  console.log('data===?', current_page)
+  if (req.query.type == 'json') {
+    return res.json({
+      title: title,
+      data: results,
+      kpjs1: kpjs1,
+      kpjs2: kpjs2,
+      total_cakupan: total_cakupan,
+      hotlink: PROVINSI_ID_STATIC,
+      numeral: numeral,
+      params: req.query.child ? req.query.child : '',
+      next: req.query.child ? req.query.child : '',
+    });
+  }
   res.render(template, {
     title: title,
     data: results,
