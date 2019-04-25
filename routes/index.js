@@ -13,8 +13,8 @@ const async = require('async');
 
 /* GET home page. */
 
-router.get('/tps/summary/',function(req,res){
-  res.redirect('/')
+router.get('/tps/summary/', function(req, res) {
+
 })
 
 function getTPSSummary(req, res) {
@@ -55,9 +55,9 @@ function render(results, req, res, next) {
   if (results.KP === undefined || results.KPU === undefined) {
     res.json('err');
   }
-  if (results.KP.parentIds.length === 4 && !req.query.type) {
-    return res.redirect('/tps/summary/?child=' + req.query.child);
-  }
+  // if (results.KP.parentIds.length === 4 && !req.query.type) {
+  //   return res.redirect('/tps/summary/?child=' + req.query.child);
+  // }
 
   var kpjs1 = 0;
   var kpjs2 = 0;
@@ -96,6 +96,7 @@ function render(results, req, res, next) {
       kpjs2: kpjs2,
       total_cakupan: total_cakupan,
       numeral: numeral,
+      params: req.query.child ? req.query.child : '',
       next: req.query.child ? req.query.child : '',
     });
   }
@@ -120,6 +121,8 @@ function render(results, req, res, next) {
     kpp2: kp_onno_pas2,
     kppcakupan: kp_onno_cakupan,
     kpjs2: kpjs2,
+    params: req.query.child ? req.query.child : '',
+    next: req.query.child ? req.query.child : '',
     total_cakupan: total_cakupan,
     numeral: numeral
   });
@@ -141,11 +144,10 @@ function getInformation(req, res) {
       }
     }
     KPU_URL = 'https://pemilu2019.kpu.go.id/static/json/hhcw/ppwp/' + url + '.json'
-    //  https://pemilu2019.kpu.go.id/static/json/hhcw/ppwp/1/1492.json
     KP_ONNO = 'https://pantau.kawalpilpres2019.id/api/tps-' + current_page + '.json?nocache=' + new Date().getTime()
   }
   console.log(KPU_URL);
-  async.parallel({
+  async.series({
       KP: function(callback) {
         request('https://kawal-c1.appspot.com/api/c/' + current_page + '?' + new Date().getTime(), {
           json: true
@@ -195,14 +197,12 @@ function getInformation(req, res) {
       }
     },
     function(err, results) {
-      //console.log(results);
-      //
       if (!err) {
         var key = '0';
         if (typeof req.query.child != 'undefined') {
           key = req.query.child
         }
-        client.setex(key, 3600, JSON.stringify(results));
+        client.setex(key, 7200, JSON.stringify(results));
       }
       console.log(results);
       render(results, req, res);

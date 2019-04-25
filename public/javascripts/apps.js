@@ -38,98 +38,121 @@ new Vue({
 })
 
 function drawChartKPP(pas1, pas2) {
-
-
-  var canvas = document.getElementById('KPP');
-  var data = {
-
-    labels: ["JOKOWI-AMIN", "PRABOWO SANDI"],
-    datasets: [{
-      label: "Kawal Pemilu",
-      backgroundColor: ['#dc3545', '#28a745'],
-      borderWidth: 0,
-      data: [parseFloat((pas1 / (pas1 + pas2)) * 100).toFixed(2), parseFloat((pas2 / (pas2 + pas1)) * 100).toFixed(2)],
-    }]
-  };
-  var option = {
-    type: 'bar',
-    scales: {
-      yAxes: [{
-        stacked: true,
-        gridLines: {
-          display: false,
-          color: "rgba(255,99,132,0.2)"
+  Highcharts.chart('KPP', {
+    chart: {
+      plotBorderWidth: null,
+      plotShadow: false,
+      type: 'pie'
+    },
+    title: {
+      text: 'Kawal Pilpres'
+    },
+    tooltip: {
+      pointFormat: ' <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        colors: ['rgb(142,214,255)', 'rgb(255,227,176)'],
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          format: '<b>{point.name}</b>: {point.percentage:.1f} %'
         }
-      }],
-
-    }
-  };
-
-  var myBarChart = new Chart(canvas, {
-    type: 'pie',
-    data: data,
+      }
+    },
+    series: [{
+      colorByPoint: true,
+      data: [{
+        name: 'Prabowo Sandi',
+        y: pas2 / (pas1 + pas2) * 100,
+        sliced: false,
+        selected: true
+      }, {
+        name: 'Jokowi - Amin',
+        y: pas1 / (pas1 + pas2) * 100
+      }]
+    }]
   });
+
 }
 
 function drawChartKPJS(pas1, pas2) {
-
-
-  var canvas = document.getElementById('KPJS');
-  var data = {
-
-    labels: ["JOKOWI-AMIN", "PRABOWO SANDI"],
-    datasets: [{
-      label: "Kawal Pemilu",
-      backgroundColor: ['#dc3545', '#28a745'],
-      borderWidth: 0,
-      data: [parseFloat((pas1 / (pas1 + pas2)) * 100).toFixed(2), parseFloat((pas2 / (pas2 + pas1)) * 100).toFixed(2)],
-    }]
-  };
-  var option = {
-    type: 'bar',
-    scales: {
-      yAxes: [{
-        stacked: false,
-        gridLines: {
-          display: false,
-          color: "rgba(255,99,132,0.2)"
+  Highcharts.chart('KPJS', {
+    chart: {
+      plotBorderWidth: null,
+      plotShadow: false,
+      type: 'pie'
+    },
+    title: {
+      text: 'Kawal Pemilu'
+    },
+    tooltip: {
+      pointFormat: ' <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+      pie: {
+        colors: ['rgb(142,214,255)', 'rgb(255,227,176)'],
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          format: '<b>{point.name}</b>: {point.percentage:.1f} %'
         }
-      }],
-
-    }
-  };
-
-  var myBarChart = new Chart(canvas, {
-    type: 'pie',
-    data: data,
+      }
+    },
+    series: [{
+      colorByPoint: true,
+      data: [{
+        name: 'Prabowo Sandi',
+        y: pas2 / (pas1 + pas2) * 100,
+        sliced: false,
+        selected: true
+      }, {
+        name: 'Jokowi - Amin',
+        y: pas1 / (pas1 + pas2) * 100
+      }]
+    }]
   });
 }
 
 function drawChartKPU(pas1, pas2) {
-  var canvas = document.getElementById('KPU');
-  var dataKPU = {
-    labels: ["JOKOWI-AMIN", "PRABOWO SANDI"],
-    datasets: [{
-      label: "Komisi Pemilihan Umum",
-      backgroundColor: ['#dc3545', '#28a745'],
-      borderColor: "rgba(255,99,132,1)",
-      borderWidth: 0,
-      data: [parseFloat((pas1 / (pas1 + pas2)) * 100).toFixed(2), parseFloat((pas2 / (pas2 + pas1)) * 100).toFixed(2)],
+  Highcharts.chart('KPU', {
+    chart: {
+      plotBorderWidth: null,
+      plotShadow: false,
+      type: 'pie'
+    },
+    title: {
+      text: 'Komisi Pemilihan Umum'
+    },
+    tooltip: {
+      pointFormat: ' <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+      pie: {
+        colors: ['rgb(142,214,255)', 'rgb(255,227,176)'],
+        allowPointSelect: true,
+        cursor: 'true',
+        dataLabels: {
+          enabled: true,
+          format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+        }
+      }
+    },
+    series: [{
+      colorByPoint: true,
+      data: [{
+        name: 'Prabowo Sandi',
+        backgroundColor: '#FCFFC5',
+        y: pas2 / (pas1 + pas2) * 100,
+        sliced: false,
+        selected: true
+      }, {
+        name: 'Jokowi - Amin',
+        y: pas1 / (pas1 + pas2) * 100
+      }]
     }]
-  };
-  var option = {
-    type: 'bar',
-    scales: {
-      yAxes: [{
-        stacked: true
-      }],
-
-    }
-  };
-
-  var myBarChartKPU = new Chart(canvas, {
-    type: 'pie',
-    data: dataKPU,
   });
 
 }

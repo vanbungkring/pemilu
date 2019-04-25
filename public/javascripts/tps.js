@@ -13,6 +13,7 @@ var app = new Vue({
     axios
       .get('/?child=[' + child + ']&type=json', {})
       .then(response => {
+        console.log(response.data);
         this.info = response.data
       })
       .catch(error => {

@@ -7,6 +7,7 @@ var logger = require('morgan');
 const Sentry = require('@sentry/node');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var newIndex = require('./routes/newIndex');
 var legislatif = require('./routes/electoral');
 var visual = require('./routes/visual');
 Sentry.init({
@@ -30,6 +31,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/v2', newIndex);
 app.use('/visual', visual);
 app.use('/dapil3', usersRouter);
 app.use('/legislatif/', legislatif);
