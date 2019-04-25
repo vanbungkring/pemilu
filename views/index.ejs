@@ -84,10 +84,12 @@
             <%if(hotlink[[data.KP.parentIds[i]]]!= undefined){%>
                 <li class="breadcrumb-item"><a href="/provinsi/<%=hotlink[data.KP.parentIds[i]]['name']%>"><%=data.KP.parentNames[i]%></a></li>
             <%} else{%>
-                <li class="breadcrumb-item"><a href="/?child=[<%=next%>]"><%=data.KP.parentNames[i]%></a></li>
-              <%}%>
+                <li class="breadcrumb-item"><a href="/?child=[<%=next.slice(0, -1)%>]"><%=data.KP.parentNames[i]%></a></li>
+            <%}%>
+
         <%}%>
       <%}%>
+      <li class="breadcrumb-item"><%=data.KP.name%></li>
     </ol>
   </nav>
   <%}%>
@@ -173,7 +175,12 @@
                           <%if(hotlink[KP[0]]!= undefined){%>
                             <strong><a href="/provinsi/<%=hotlink[KP[0]]['name']%>"><%=KP[1]%></a><strong>
                           <%}else{%>
-                                <strong><a href="/?child=[<%=next?next+','+KP[0]:KP[0]%>]"><%=KP[1]%></a><strong>
+                              <%if(next.length>2){%>
+                                  <strong><%=KP[1]%><strong>
+                                  <%} else{%>
+                                    <strong><a href="/?child=[<%=next?next+','+KP[0]:KP[0]%>]"><%=KP[1]%></a><strong>
+                                      <%}%>
+
                               <%}%>
 
                 </td>
