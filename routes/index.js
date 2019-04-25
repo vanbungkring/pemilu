@@ -63,15 +63,6 @@ function render(results, req, res, next) {
   var kpjs2 = 0;
   var total_cakupan = 0;
 
-  var kp_onno_cakupan = 0;
-  var kp_onno_pas1 = 0;
-  var kp_onno_pas2 = 0;
-
-  for (var i = 0, len = Object.values(results.KP_ONNO).length; i < len; i++) {
-    kp_onno_cakupan = kp_onno_cakupan + parseInt(Object.values(results.KP_ONNO)[i]['tps_masuk'])
-    kp_onno_pas1 = kp_onno_pas1 + parseInt(Object.values(results.KP_ONNO)[i]['jokowi_amin'])
-    kp_onno_pas2 = kp_onno_pas2 + parseInt(Object.values(results.KP_ONNO)[i]['prabowo_sandi'])
-  }
   for (var i = 0, len = results.KP.children.length; i < len; i++) {
 
     if (results.KP.data[results.KP.children[i][0]] != undefined && results.KP.data[results.KP.children[i][0]]['sum']['cakupan'] != undefined) {
@@ -90,9 +81,6 @@ function render(results, req, res, next) {
       title: KPU,
       data: results,
       kpjs1: kpjs1,
-      kpp1: kp_onno_pas1,
-      kpp2: kp_onno_pas2,
-      kppcakupan: kp_onno_cakupan,
       kpjs2: kpjs2,
       total_cakupan: total_cakupan,
       numeral: numeral,
@@ -120,10 +108,7 @@ function render(results, req, res, next) {
     title: title,
     data: results,
     kpjs1: kpjs1,
-    kpp1: kp_onno_pas1,
     next: next,
-    kpp2: kp_onno_pas2,
-    kppcakupan: kp_onno_cakupan,
     kpjs2: kpjs2,
     next: req.query.child ? JSON.parse(req.query.child) : '',
     total_cakupan: total_cakupan,
@@ -163,28 +148,7 @@ function getInformation(req, res) {
           }
         });
       },
-      KP_ONNO: function(callback) {
-        request(KP_ONNO, {
-          json: true,
-          strictSSL: false
-        }, (err, res, body) => {
-          if (err) {
-            callback(err, null);
-          } else {
-            console.log(body);
-            const obj = {};
-            for (const data of body) {
-              var id = data.id;
-              if (data.id === "9000000") {
-                id = -99
-              }
-              obj[id] = data;
-            }
-            //console.log(obj)
-            callback(null, obj);
-          }
-        });
-      },
+    
       KPU: function(callback) {
         request(KPU_URL, {
           json: true,

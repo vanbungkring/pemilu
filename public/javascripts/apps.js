@@ -21,7 +21,7 @@ new Vue({
       .then(function(response) {
         var vm = this
         drawChartKPU(response.data.data.KPU.chart['21'], response.data.data.KPU.chart['22']);
-        drawChartKPP(response.data.kpp1, response.data.kpp2)
+        //drawChartKPP(response.data.kpp1, response.data.kpp2)
         drawChartKPJS(response.data.kpjs1, response.data.kpjs2);
         var a = response;
         console.log(a);

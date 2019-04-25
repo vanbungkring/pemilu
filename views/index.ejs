@@ -3,13 +3,13 @@
 
 <head>
   <title>
-    <%=title%> - KAWALPEMILU X KOMISI PEMILIHAN UMUM X KAWALPILPRES2019
+    <%=title%> - KAWALPEMILU X KOMISI PEMILIHAN UMUM
   </title>
   <meta property="description" content="#Bandingkan , antara kawal pemilu x komisi pemilihan umum x kawalpilpres2019, Mari gotong royong, Pantau pemilu - Jaga Suara 2019 " />
 
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="  <%=title%> - KAWALPEMILU X KOMISI PEMILIHAN UMUM X KAWALPILPRES2019" />
+  <meta property="og:title" content="  <%=title%> - KAWALPEMILU X KOMISI PEMILIHAN UMUM" />
   <meta property="og:site_name" content="PEMILU AGREGATOR" />
   <meta property="og:image" content="http://pemilu.masmadmad.com/images/data.jpg" />
   <meta property="og:url" content="https://pemilu.masmadmad.com" />
@@ -46,9 +46,6 @@
           <a class="nav-link" href="https://kawalpemilu.org">Kawal Pemilu</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="https://kawalpilpres2019.id">Kawal Pilpres 2019</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="https://kpu.go.id">Komisi Pemilihan Umum</a>
         </li>
       </ul>
@@ -56,26 +53,22 @@
     </div>
   </nav>
   <div class="container-fluid" style="margin-top:40px">
-    <h1>Hasil Tabulasi Realtime Jaga suara 2019 (Kawal Pemilu,Kawal Pilpres KPU)</h1>
-    <p>Situs ini mengagregasi Suara dari 3 sumber yaitu kawalpemilu.org kawalpilpres2019 dan situs resmi KPU
+    <h1>Hasil Tabulasi Realtime Jaga suara 2019 (Kawal Pemilu & KPU)</h1>
+    <p>Situs ini mengagregasi Suara dari 2 sumber yaitu kawalpemilu.org dan situs resmi KPU
     </p>
     <div class="alert alert-danger">
-      <p>Semua table informasi di bawah ini merupakan kurasi dari situs kawalpemilu,kawalpilpres2019 dan Official Resmi Dari KPU, <strong>dan untuk Data pada halaman ini masih belum final dan akan terus diperbarui secara berkala!</strong>
+      <p>Semua table informasi di bawah ini merupakan kurasi dari situs kawalpemilu dan Official Resmi Dari KPU, <strong>dan untuk Data pada halaman ini masih belum final dan akan terus diperbarui secara berkala!</strong>
       </p>
       <h5>Latest Update: <%=data.KPU.ts%></h5>
     </div>
     <div class="container-fluid">
       <div class="row">
         <br>
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div id="KPJS"></div>
           </br>
         </div>
-        <div class="col-md-4">
-          <div id="KPP"></div>
-          </br>
-        </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div id="KPU"></div>
         </div>
       </div>
@@ -85,7 +78,6 @@
     <tr style="background:#000;color:#fff;text-align:center;vertical-align:top">
       <th class="tg-wy7m" colspan="2">Nama Wilayah</th>
       <th class="tg-s9og" colspan="4" style="background:#37474f">Kawal Pemilu </th>
-      <th class="tg-s9og" colspan="4" style="background:#3f51b5">Kawal Pilpres</th>
       <th class="tg-1sci" colspan="3">Komisi Pemilihan Umum</th>
     </tr>
 
@@ -98,13 +90,6 @@
         <div style="display:block;font-size:10px">(Suara Sah)</div>
       </td>
       <td class="tg-khjd" style="background:#37474f">Cakupan TPS</td>
-      <td class="tg-7f7m" style="background:#3f51b5">Jokowi-Amin </td>
-      <td class="tg-7f7m" style="background:#3f51b5">Prabowo-Sandi</td>
-      <td class="tg-7f7m" style="background:#3f51b5">
-        <div style="display:block;">Total</div>
-        <div style="display:block;font-size:10px">(Suara Sah)</div>
-      </td>
-      <td class="tg-khjd" style="background:#3f51b5">Cakupan TPS</td>
       <td class="tg-7f7m">Jokowi-Amin
         <td class="tg-7f7m">Prabowo-Sandi</td>
         <td class="tg-7f7m">
@@ -137,33 +122,7 @@
         <br>
         <strong><%= parseFloat((total_cakupan/data.KPU.progress.total)*100).toPrecision(4)%> % dari data KPU</strong>
       </td>
-      <!-- ->kawal pilpres
 
-      <!--->
-      <td class="tg-khjd text-right">
-
-        <%=numeral(kpp1).format(0,0)%>
-          <br>
-          <strong>(<%=parseFloat(kpp1/(kpp1+kpp2)*100).toPrecision(4)%>%)</strong>
-      </td>
-      <td class="tg-khjd text-right">
-        <%=numeral(kpp2).format(0,0)%>
-          <br>
-          <strong>(<%=parseFloat(kpp2/(kpp2+kpp1)*100).toPrecision(4)%>%)</strong>
-      </td>
-
-      <td class="tg-khjd text-right">
-        <%=numeral(kpp1+kpp2).format(0,0)%>
-      </td>
-      <td class="tg-khjd text-right">
-        <strong><%=numeral(kppcakupan).format(0.0)%> </strong>dari
-        <strong><%=numeral(data.KPU.progress.total).format(0.0)%></strong>
-        <br>
-        <strong><%= parseFloat((kppcakupan/data.KPU.progress.total)*100).toPrecision(4)%> % dari data KPU</strong>
-      </td>
-      <!-- ->kawal pilpres
-
-      <!--->
       <td class="tg-khjd text-right">
         <%=numeral(data.KPU.chart[21]).format(0,0)%>
           <br>
@@ -230,60 +189,29 @@
                               </div><small><strong><%= progress %>% </strong> estimasi tps terproses</small>
 
                             </td>
-                            <%var suara_onno_1 = data.KP_ONNO[parseInt(KP[0])][ 'jokowi_amin']; var suara_onno_2 = data.KP_ONNO[parseInt(KP[0])]['prabowo_sandi'] %>
-                              <%if(suara_onno_1>suara_onno_2){%>
-                                <td class="tg-0lax text-right" style="background:#d4edda; font-weight:bold">
-                                  <%}else{%>
-                                    <td class="tg-0lax text-right">
-                                      <%}%>
-                                        <div style="display:block">
-                                          <strong><%= numeral(suara_onno_1).format(0.0)%> <strong></div>
-                                   <div style="display:block; font-size:10px;">(<%= parseFloat((suara_onno_1/(suara_onno_1+suara_onno_2))*100).toPrecision(4)%> %)</div>
-                    </td>
 
-                    <%if(suara_onno_1<suara_onno_2){%>
-                    <td class="tg-0lax text-right" style="background:#d4edda; font-weight:bold">
-                      <%}else{%>
-                          <td class="tg-0lax text-right">
-                        <%}%>
-                        <strong><%= numeral(suara_onno_2).format(0.0)%> <strong></div>
-                           <div style="display:block; font-size:10px;">(<%= parseFloat((suara_onno_2/(suara_onno_1+suara_onno_2))*100).toPrecision(4)%> %)</div>
-                    </td>
+                            <%if(suaraKPU1>suaraKPU2){%>
+                              <td class="tg-0lax text-right" style="background:#d4edda; font-weight:bold">
+                                <%}else{%>
+                                  <td class="tg-0lax text-right " style="background:#efefef">
+                                    <%}%>
+                                      <strong><%=numeral(data.KPU.table[parseInt(KP[0])]['21']).format(0,0)%></strong>
+                                      <div style="display:block; font-size:10px;">(
+                                        <%= parseFloat((data.KPU.table[parseInt(KP[0])]['21']/(data.KPU.table[parseInt(KP[0])]['21']+data.KPU.table[parseInt(KP[0])]['22']))*100).toPrecision(4)%> %)</div>
+                                  </td>
 
-
-                    <td class="tg-0lax text-right">
-                      <strong><%= numeral(data.KP_ONNO[parseInt(KP[0])]['prabowo_sandi']+data.KP_ONNO[parseInt(KP[0])]['jokowi_amin']).format(0.0)%> <strong>
-                    </td>
-                    <td class="tg-0lax text-right">
-                        <strong><%= numeral(data.KP_ONNO[parseInt(KP[0])]['tps_masuk']).format(0.0)%> <strong> dari <strong><%=numeral(KP[2]).format(0.0)%></strong>
-                                          <div class="progress">
-                                            <%var progressOnno =parseFloat((parseFloat(data.KP_ONNO[parseInt(KP[0])]['tps_masuk'])/parseInt(KP[2]))*100).toPrecision(4)%>
-                                              <%var classing = progressOnno>50?'bg-success':'bg-warning'%>
-                                                <div class="progress-bar <%=classing%>" role="progressbar" style="width: <%=progressOnno%>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="<%=parseInt(KP[2])%>"></div>
-                                          </div><small><strong><%= progressOnno %>% </strong> estimasi tps terproses</small>
-                                    </td>
-                                    <%if(suaraKPU1>suaraKPU2){%>
-                                      <td class="tg-0lax text-right" style="background:#d4edda; font-weight:bold">
-                                        <%}else{%>
-                                          <td class="tg-0lax text-right " style="background:#efefef">
-                                            <%}%>
-                                              <strong><%=numeral(data.KPU.table[parseInt(KP[0])]['21']).format(0,0)%></strong>
-                                              <div style="display:block; font-size:10px;">(
-                                                <%= parseFloat((data.KPU.table[parseInt(KP[0])]['21']/(data.KPU.table[parseInt(KP[0])]['21']+data.KPU.table[parseInt(KP[0])]['22']))*100).toPrecision(4)%> %)</div>
-                                          </td>
-
-                                          <%if(suaraKPU1<suaraKPU2){%>
-                                            <td class="tg-0lax text-right" style="background:#d4edda; font-weight:bold">
-                                              <%}else{%>
-                                                <td class="tg-0lax text-right" style="background:#efefef">
-                                                  <%}%>
-                                                    <strong><%=numeral(data.KPU.table[parseInt(KP[0])]['22']).format(0,0)%></strong>
-                                                    <div style="display:block; font-size:10px;">(
-                                                      <%= parseFloat((data.KPU.table[parseInt(KP[0])]['22']/(data.KPU.table[parseInt(KP[0])]['21']+data.KPU.table[parseInt(KP[0])]['22']))*100).toPrecision(4)%> %)</div>
-                                                </td>
-                                                <td class="tg-0lax text-right" style="background:#efefef">
-                                                  <%=numeral(parseInt(data.KPU.table[parseInt(KP[0])]['21'])+parseInt(data.KPU.table[parseInt(KP[0])]['22'])).format(0,0)%>
-                                                </td>
+                                  <%if(suaraKPU1<suaraKPU2){%>
+                                    <td class="tg-0lax text-right" style="background:#d4edda; font-weight:bold">
+                                      <%}else{%>
+                                        <td class="tg-0lax text-right" style="background:#efefef">
+                                          <%}%>
+                                            <strong><%=numeral(data.KPU.table[parseInt(KP[0])]['22']).format(0,0)%></strong>
+                                            <div style="display:block; font-size:10px;">(
+                                              <%= parseFloat((data.KPU.table[parseInt(KP[0])]['22']/(data.KPU.table[parseInt(KP[0])]['21']+data.KPU.table[parseInt(KP[0])]['22']))*100).toPrecision(4)%> %)</div>
+                                        </td>
+                                        <td class="tg-0lax text-right" style="background:#efefef">
+                                          <%=numeral(parseInt(data.KPU.table[parseInt(KP[0])]['21'])+parseInt(data.KPU.table[parseInt(KP[0])]['22'])).format(0,0)%>
+                                        </td>
         </tr>
 
         <%})%>
