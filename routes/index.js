@@ -13,7 +13,7 @@ const numeral = require('numeral');
 const async = require('async');
 
 /* GET home page. */
-router.get('/provinsi/:id',cached, baseOnProvince)
+router.get('/provinsi/:id', cached, baseOnProvince)
 
 function baseOnProvince(req, res) {
   if (PROVINSI_STATIC[req.params.id] === undefined) {
@@ -53,8 +53,62 @@ function baseOnProvince(req, res) {
         key = PROVINSI_STATIC[req.params.id]['name']
         client.setex(key, 7200, JSON.stringify(results));
       }
-      render(results, req, res);
+      render2(results, current_page, req, res);
     });
+}
+
+function render2(results, current_page, req, res) {
+
+  if (results.KP === undefined || results.KPU === undefined) {
+    res.json('err');
+  }
+  // if (results.KP.parentIds.length === 4 && !req.query.type) {
+  //   return res.redirect('/tps/summary/?child=' + req.query.child);
+  // }
+
+  var kpjs1 = 0;
+  var kpjs2 = 0;
+  var total_cakupan = 0;
+
+  for (var i = 0, len = results.KP.children.length; i < len; i++) {
+
+    if (results.KP.data[results.KP.children[i][0]] != undefined && results.KP.data[results.KP.children[i][0]]['sum']['cakupan'] != undefined) {
+      total_cakupan = total_cakupan + parseInt(results.KP.data[results.KP.children[i][0]]['sum']['cakupan'])
+    }
+    if (results.KP.data[results.KP.children[i][0]] != undefined && results.KP.data[results.KP.children[i][0]]['sum']['pas1'] != undefined) {
+      kpjs1 = kpjs1 + parseInt(results.KP.data[results.KP.children[i][0]]['sum']['pas1'])
+    }
+    if (results.KP.data[results.KP.children[i][0]] != undefined && results.KP.data[results.KP.children[i][0]]['sum']['pas2'] != undefined) {
+      kpjs2 = kpjs2 + parseInt(results.KP.data[results.KP.children[i][0]]['sum']['pas2'])
+    }
+  }
+  var next;
+  var template = 'index'
+  var is_tps_detail = false
+  if (typeof req.query.child != 'undefined') {
+    next = JSON.parse(req.query.child).join();
+    if (JSON.parse(req.query.child).length === 4) {
+      is_tps_detail = true;
+    }
+  }
+  if (is_tps_detail) {
+    template = 'tpsDetail';
+  }
+  var title = 'Nasional'
+  if (results.KP.name != 'IDN') {
+    title = 'Hasil Real count provinsi '+results.KP.name;
+  }
+  console.log('data===?', current_page)
+  res.render(template, {
+    title: title,
+    data: results,
+    kpjs1: kpjs1,
+    next: next,
+    kpjs2: kpjs2,
+    next: [current_page],
+    total_cakupan: total_cakupan,
+    numeral: numeral
+  });
 }
 // function generateProvinsi(req, res, next) {
 //   request('https://kawal-c1.appspot.com/api/c/' + current_page + '?' + new Date().getTime(), {
@@ -108,6 +162,9 @@ function cached(req, res, next) {
       next();
     };
     if (data != null) {
+      if (req.params.id) {
+        return render2(JSON.parse(data), PROVINSI_STATIC[key]['id'], req, res);
+      }
       return render(JSON.parse(data), req, res)
     } else {
       next();
