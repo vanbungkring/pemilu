@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    KAWALPEMILU X KOMISI PEMILIHAN UMUM X KAWALPILPRES2019
+  </title>
+  <meta property="description" content="#Bandingkan , antara kawal pemilu x komisi pemilihan umum x kawalpilpres2019, Mari gotong royong, Pantau pemilu - Jaga Suara 2019 " />
+
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="#pemilu" />
+  <meta property="og:site_name" content="PEMILU AGREGATOR" />
+  <meta property="og:image" content="http://pemilu.masmadmad.com/images/data.jpg" />
+  <meta property="og:url" content="https://pemilu.masmadmad.com" />
+  <meta property="og:description" content="#bandingkan , antara kawal pemilu ,kawalpilpres2019 dan komisi pemilihan umum, Mari gotong royong, Pantau pemilu - Jaga Suara 2019" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script type="text/javascript">
+    var child = <%=params%>;
+  </script>
+</head>
+<style media="screen">
+  .progress {
+    background-color: #ccc !important;
+  }
+
+  table {
+    font-size: small;
+    vertical-align: middle;
+  }
+</style>
+
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="#">mas-madmad</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Beranda <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://kawalpemilu.org">Kawal Pemilu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://kawalpilpres2019.id">Kawal Pilpres 2019</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://kpu.go.id">Komisi Pemilihan Umum</a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+
+  <div class="container-fluid" style="margin-top:40px" id="app">
+    <h1>Hasil Tabulasi Realtime Jaga suara 2019 (Kawal Pemilu,Kawal Pilpres KPU)</h1>
+    <p>Situs ini mengagregasi Suara dari 3 sumber yaitu kawalpemilu.org kawalpilpres2019 dan situs resmi KPU
+    </p>
+    <div class="alert alert-danger">
+      <p>Semua table informasi di bawah ini merupakan kurasi dari situs kawalpemilu,kawalpilpres2019 dan Official Resmi Dari KPU, <strong>dan untuk Data pada halaman ini masih belum final dan akan terus diperbarui secara berkala!</strong>
+      </p>
+      <div v-if="errored">
+        <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
+      </div>
+      <div v-else>
+        <div v-if="loading">Loading...</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-bordered table-sm table-hover">
+          <thead>
+            <tr style="background:#000;color:#fff;text-align:center;vertical-align:top">
+              <th class="tg-wy7m" colspan="2">Nomor TPS</th>
+              <th class="tg-s9og" colspan="3" style="background:#37474f">Kawal Pemilu </th>
+              <th class="tg-s9og" colspan="3" style="background:#3f51b5">Kawal Pilpres</th>
+              <th class="tg-1sci" colspan="3">Komisi Pemilihan Umum</th>
+            </tr>
+
+            <tr style="background-color:#333333;color:#ffffff;text-align:center;vertical-align:top">
+              <td class="tg-7f7m" colspan="2">Keterangan</td>
+              <td class="tg-7f7m" style="background:#37474f">Jokowi-Amin </td>
+              <td class="tg-7f7m" style="background:#37474f">Prabowo-Sandi</td>
+              <td class="tg-7f7m" style="background:#37474f">
+                <div style="display:block;">Total</div>
+                <div style="display:block;font-size:10px">(Suara Sah)</div>
+              </td>
+              <td class="tg-7f7m" style="background:#3f51b5">Jokowi-Amin </td>
+              <td class="tg-7f7m" style="background:#3f51b5">Prabowo-Sandi</td>
+              <td class="tg-7f7m" style="background:#3f51b5">
+                <div style="display:block;">Total</div>
+                <div style="display:block;font-size:10px">(Suara Sah)</div>
+              </td>
+              <td class="tg-7f7m">Jokowi-Amin
+                <td class="tg-7f7m">Prabowo-Sandi</td>
+                <td class="tg-7f7m">
+                  <div style="display:block;">Total</div>
+                  <div style="display:block;font-size:10px">(Suara Sah)</div>
+                </td>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr v-for="data in info.data.KP.children">
+                <td colspan="2">{{data[0]}}</td>
+
+              <td>{{ info.data.KP.data[data[0]]['sum'] }}</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>Mark</td>
+
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-138792337-1"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="/javascripts/tps.js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'UA-138792337-1');
+</script>
+
+</html>

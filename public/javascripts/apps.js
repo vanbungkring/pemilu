@@ -10,10 +10,13 @@ new Vue({
   },
 
   mounted() {
-    axios.get('/', {
-        params: {
-          type: 'json'
-        }
+    var query = '?type=json'
+    if (window.location.search) {
+      query = window.location.search + '&type=json'
+    }
+    console.log(window.location.search)
+    axios.get('/' + query, {
+
       })
       .then(function(response) {
         var vm = this
@@ -43,7 +46,7 @@ function drawChartKPP(pas1, pas2) {
     labels: ["JOKOWI-AMIN", "PRABOWO SANDI"],
     datasets: [{
       label: "Kawal Pemilu",
-      backgroundColor: ['#dc3545','#28a745'],
+      backgroundColor: ['#dc3545', '#28a745'],
       borderWidth: 0,
       data: [parseFloat((pas1 / (pas1 + pas2)) * 100).toFixed(2), parseFloat((pas2 / (pas2 + pas1)) * 100).toFixed(2)],
     }]
@@ -77,7 +80,7 @@ function drawChartKPJS(pas1, pas2) {
     labels: ["JOKOWI-AMIN", "PRABOWO SANDI"],
     datasets: [{
       label: "Kawal Pemilu",
-      backgroundColor: ['#dc3545','#28a745'],
+      backgroundColor: ['#dc3545', '#28a745'],
       borderWidth: 0,
       data: [parseFloat((pas1 / (pas1 + pas2)) * 100).toFixed(2), parseFloat((pas2 / (pas2 + pas1)) * 100).toFixed(2)],
     }]
@@ -86,7 +89,7 @@ function drawChartKPJS(pas1, pas2) {
     type: 'bar',
     scales: {
       yAxes: [{
-        stacked: true,
+        stacked: false,
         gridLines: {
           display: false,
           color: "rgba(255,99,132,0.2)"
@@ -108,7 +111,7 @@ function drawChartKPU(pas1, pas2) {
     labels: ["JOKOWI-AMIN", "PRABOWO SANDI"],
     datasets: [{
       label: "Komisi Pemilihan Umum",
-      backgroundColor: ['#dc3545','#28a745'],
+      backgroundColor: ['#dc3545', '#28a745'],
       borderColor: "rgba(255,99,132,1)",
       borderWidth: 0,
       data: [parseFloat((pas1 / (pas1 + pas2)) * 100).toFixed(2), parseFloat((pas2 / (pas2 + pas1)) * 100).toFixed(2)],
@@ -118,11 +121,7 @@ function drawChartKPU(pas1, pas2) {
     type: 'bar',
     scales: {
       yAxes: [{
-        stacked: true,
-        gridLines: {
-          display: false,
-          color: "rgba(255,99,132,0.2)"
-        }
+        stacked: true
       }],
 
     }
