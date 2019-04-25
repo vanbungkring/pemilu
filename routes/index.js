@@ -13,7 +13,9 @@ const async = require('async');
 
 /* GET home page. */
 
-router.get('/tps/summary/', cached, getTPSSummary)
+router.get('/tps/summary/',function(req,res){
+  res.redirect('/')
+})
 
 function getTPSSummary(req, res) {
   res.render('tpsDetail', {
@@ -22,7 +24,7 @@ function getTPSSummary(req, res) {
     params: req.query.child
   });
 }
-router.get('/', getInformation);
+router.get('/', cached, getInformation);
 
 function cached(req, res, next) {
   var key = '0'
