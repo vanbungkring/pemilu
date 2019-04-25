@@ -7,8 +7,8 @@ if (mongoose.connection.readyState === 0) {
 
 var newSchema = new Schema({
   'KP': Schema.Types.Mixed,
-  ,
   'KPU': Schema.Types.Mixed,
+  'KPP': Schema.Types.Mixed,
   'createdAt': {
     type: Date,
     default: Date.now

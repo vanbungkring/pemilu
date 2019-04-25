@@ -13,6 +13,10 @@ function init() {
   });
 }
 
+function registerAgendaJob() {
+
+}
+
 function removeStaleJobs(callback) {
   agenda._collection.updateOne({
     lockedAt: {
@@ -26,3 +30,4 @@ function removeStaleJobs(callback) {
     multi: true
   }, callback);
 }
+module.exports = init();

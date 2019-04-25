@@ -1,6 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+//var agenda = require('./agenda');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const Sentry = require('@sentry/node');
@@ -8,9 +9,12 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var legislatif = require('./routes/electoral');
 var visual = require('./routes/visual');
-Sentry.init({ dsn: 'https://e63bdf329ff54f3693cc109a28b50587@sentry.io/1446312' });
+Sentry.init({
+  dsn: 'https://e63bdf329ff54f3693cc109a28b50587@sentry.io/1446312'
+});
 
 var app = express();
+//agenda.init();
 // The request handler must be the first middleware on the app
 app.use(Sentry.Handlers.requestHandler());
 // view engine setup

@@ -224,7 +224,7 @@
                               </div><small><strong><%= progress %>% </strong> estimasi tps terproses</small>
 
                             </td>
-                            <%var suara_onno_1 = typeof data.KP_ONNO[parseInt(KP[0])]!=undefined?data.KP_ONNO[parseInt(KP[0])][ 'jokowi_amin']:0; var suara_onno_2 = typeof data.KP_ONNO[parseInt(KP[0])]!=undefined?data.KP_ONNO[parseInt(KP[0])][ 'prabowo_sandi']:0; %>
+                            <%var suara_onno_1 = data.KP_ONNO[parseInt(KP[0])][ 'jokowi_amin']; var suara_onno_2 = data.KP_ONNO[parseInt(KP[0])]['prabowo_sandi'] %>
                               <%if(suara_onno_1>suara_onno_2){%>
                                 <td class="tg-0lax text-right" style="background:#d4edda; font-weight:bold">
                                   <%}else{%>
