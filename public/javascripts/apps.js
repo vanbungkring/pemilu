@@ -10,12 +10,17 @@ new Vue({
   },
 
   mounted() {
+    var pageURL ='/'
+    if (window.location.pathname) {
+      pageURL = window.location.pathname;
+    }
     var query = '?type=json'
     if (window.location.search) {
       query = window.location.search + '&type=json'
     }
+    console.log('/'+pageURL+'' + query)
     console.log(window.location.search)
-    axios.get('/' + query, {
+    axios.get(pageURL+'' + query, {
 
       })
       .then(function(response) {
