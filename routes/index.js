@@ -9,7 +9,7 @@ var KP_ONNO = 'https://pantau.kawalpilpres2019.id/api/tps.json'
 var KPU_DET = 'https://pemilu2019.kpu.go.id/static/json/hhcw/ppwp/' + current_page + '.json'
 const request = require('request');
 const PROVINSI_STATIC = require('../static/provinsi');
-const PROVINSI_ID_STATIC = require('../static/provinsi-id');
+const PROVINSI_ID_STATIC = require('../static/provinsiid');
 const numeral = require('numeral');
 const async = require('async');
 
