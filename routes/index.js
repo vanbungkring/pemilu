@@ -199,7 +199,7 @@ function getInformation(req, res) {
         if (typeof req.query.child != 'undefined') {
           key = req.query.child
         }
-        client.setex(key, 2600, JSON.stringify(results));
+        client.setex(key, 3600, JSON.stringify(results));
       }
       console.log(results);
       render(results, req, res);
