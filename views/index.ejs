@@ -74,6 +74,23 @@
       </div>
     </div>
   </div>
+  <%if(data.KP.parentIds.length){%>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <% for(var i=0;i<data.KP.parentIds.length;i++){%>
+        <%if(i==0){%>
+            <li class="breadcrumb-item"><a href="/"><%=data.KP.parentNames[i]%></a></li>
+        <%}else{%>
+            <%if(hotlink[[data.KP.parentIds[i]]]!= undefined){%>
+                <li class="breadcrumb-item"><a href="/provinsi/<%=hotlink[data.KP.parentIds[i]]['name']%>"><%=data.KP.parentNames[i]%></a></li>
+            <%} else{%>
+                <li class="breadcrumb-item"><a href="/?child=[<%=next%>]"><%=data.KP.parentNames[i]%></a></li>
+              <%}%>
+        <%}%>
+      <%}%>
+    </ol>
+  </nav>
+  <%}%>
   <table class="table table-bordered table-sm table-hover" id="app">
     <tr style="background:#000;color:#fff;text-align:center;vertical-align:top">
       <th class="tg-wy7m" colspan="2">Nama Wilayah</th>
