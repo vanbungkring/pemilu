@@ -22,7 +22,7 @@ function getTPSSummary(req, res) {
     params: req.query.child
   });
 }
-router.get('/',cached, getInformation);
+router.get('/', getInformation);
 
 function cached(req, res, next) {
   var key = '0'
