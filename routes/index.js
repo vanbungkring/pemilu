@@ -8,11 +8,80 @@ var KPU = 'https://pemilu2019.kpu.go.id/static/json/hhcw/ppwp.json'
 var KP_ONNO = 'https://pantau.kawalpilpres2019.id/api/tps.json'
 var KPU_DET = 'https://pemilu2019.kpu.go.id/static/json/hhcw/ppwp/' + current_page + '.json'
 const request = require('request');
+const PROVINSI_STATIC = require('../static/provinsi');
 const numeral = require('numeral');
 const async = require('async');
 
 /* GET home page. */
+router.get('/provinsi/:id',cached, baseOnProvince)
 
+function baseOnProvince(req, res) {
+  if (PROVINSI_STATIC[req.params.id] === undefined) {
+    res.redirect('/')
+  }
+  current_page = PROVINSI_STATIC[req.params.id]['id']
+  async.series({
+      KP: function(callback) {
+        request('https://kawal-c1.appspot.com/api/c/' + current_page + '?' + new Date().getTime(), {
+          json: true
+        }, (err, res, body) => {
+          if (err) {
+            callback(err, null);
+          } else {
+            console.log(body);
+            callback(null, body);
+          }
+        });
+      },
+
+      KPU: function(callback) {
+        request('https://pemilu2019.kpu.go.id/static/json/hhcw/ppwp/' + current_page + '.json', {
+          json: true,
+          strictSSL: false
+        }, (err, res, body) => {
+          if (err) {
+            //console.log(err);
+            callback(err, null);
+          } else {
+            callback(null, body);
+          }
+        });
+      }
+    },
+    function(err, results) {
+      if (!err) {
+        key = PROVINSI_STATIC[req.params.id]['name']
+        client.setex(key, 7200, JSON.stringify(results));
+      }
+      render(results, req, res);
+    });
+}
+// function generateProvinsi(req, res, next) {
+//   request('https://kawal-c1.appspot.com/api/c/' + current_page + '?' + new Date().getTime(), {
+//     json: true
+//   }, (err, resp, body) => {
+//     if (err) {
+//       res.json(err)
+//     } else {
+//       var array = [];
+//       for (var i = 0; i < body.children.length; i++) {
+//         var data = {};
+//         data.name = body.children[i][1].replace(/ /g, "-").toLowerCase();
+//         data.id = body.children[i][0]
+//         data.seo = 'Hasil Real count provinsi ' + body.children[i][1];
+//         array.push(data);
+//       }
+//       var result = {};
+//       for (var i = 0; i < array.length; i++) {
+//         result[array[i].name] = array[i];
+//       }
+//
+//       //result
+//       console.log(result);
+//       res.json(result);
+//     }
+//   });
+// }
 router.get('/tps/summary/', function(req, res) {
 
 })
@@ -30,6 +99,9 @@ function cached(req, res, next) {
   var key = '0'
   if (typeof req.query.child != 'undefined') {
     key = req.query.child
+  }
+  if (typeof req.params.id != 'undefined') {
+    key = req.params.id
   }
   client.get(key, function(err, data) {
     if (err) {
@@ -148,7 +220,7 @@ function getInformation(req, res) {
           }
         });
       },
-    
+
       KPU: function(callback) {
         request(KPU_URL, {
           json: true,
