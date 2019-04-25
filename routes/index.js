@@ -9,11 +9,13 @@ var KP_ONNO = 'https://pantau.kawalpilpres2019.id/api/tps.json'
 var KPU_DET = 'https://pemilu2019.kpu.go.id/static/json/hhcw/ppwp/' + current_page + '.json'
 const request = require('request');
 const PROVINSI_STATIC = require('../static/provinsi');
+const PROVINSI_ID_STATIC = require('../static/provinsi-id');
 const numeral = require('numeral');
 const async = require('async');
 
 /* GET home page. */
 router.get('/provinsi/:id', cached, baseOnProvince)
+router.get('/generator', generateProvinsi);
 
 function baseOnProvince(req, res) {
   if (PROVINSI_STATIC[req.params.id] === undefined) {
@@ -96,7 +98,7 @@ function render2(results, current_page, req, res) {
   }
   var title = 'Nasional'
   if (results.KP.name != 'IDN') {
-    title = 'Hasil Real count provinsi '+results.KP.name;
+    title = 'Hasil Real count provinsi ' + results.KP.name;
   }
   console.log('data===?', current_page)
   res.render(template, {
@@ -105,37 +107,39 @@ function render2(results, current_page, req, res) {
     kpjs1: kpjs1,
     next: next,
     kpjs2: kpjs2,
+    hotlink: PROVINSI_ID_STATIC,
     next: [current_page],
     total_cakupan: total_cakupan,
     numeral: numeral
   });
 }
-// function generateProvinsi(req, res, next) {
-//   request('https://kawal-c1.appspot.com/api/c/' + current_page + '?' + new Date().getTime(), {
-//     json: true
-//   }, (err, resp, body) => {
-//     if (err) {
-//       res.json(err)
-//     } else {
-//       var array = [];
-//       for (var i = 0; i < body.children.length; i++) {
-//         var data = {};
-//         data.name = body.children[i][1].replace(/ /g, "-").toLowerCase();
-//         data.id = body.children[i][0]
-//         data.seo = 'Hasil Real count provinsi ' + body.children[i][1];
-//         array.push(data);
-//       }
-//       var result = {};
-//       for (var i = 0; i < array.length; i++) {
-//         result[array[i].name] = array[i];
-//       }
-//
-//       //result
-//       console.log(result);
-//       res.json(result);
-//     }
-//   });
-// }
+
+function generateProvinsi(req, res, next) {
+  request('https://kawal-c1.appspot.com/api/c/' + current_page + '?' + new Date().getTime(), {
+    json: true
+  }, (err, resp, body) => {
+    if (err) {
+      res.json(err)
+    } else {
+      var array = [];
+      for (var i = 0; i < body.children.length; i++) {
+        var data = {};
+        data.name = body.children[i][1].replace(/ /g, "-").toLowerCase();
+        data.id = body.children[i][0]
+        data.seo = 'Hasil Real count provinsi ' + body.children[i][1];
+        array.push(data);
+      }
+      var result = {};
+      for (var i = 0; i < array.length; i++) {
+        result[array[i].id] = array[i];
+      }
+
+      //result
+      console.log(result);
+      res.json(result);
+    }
+  });
+}
 router.get('/tps/summary/', function(req, res) {
 
 })
@@ -212,6 +216,7 @@ function render(results, req, res, next) {
       kpjs1: kpjs1,
       kpjs2: kpjs2,
       total_cakupan: total_cakupan,
+      hotlink: PROVINSI_ID_STATIC,
       numeral: numeral,
       params: req.query.child ? req.query.child : '',
       next: req.query.child ? req.query.child : '',
@@ -238,6 +243,7 @@ function render(results, req, res, next) {
     data: results,
     kpjs1: kpjs1,
     next: next,
+    hotlink: PROVINSI_ID_STATIC,
     kpjs2: kpjs2,
     next: req.query.child ? JSON.parse(req.query.child) : '',
     total_cakupan: total_cakupan,

@@ -153,7 +153,12 @@
                     <%var totalSuaraKPU=parseInt(suaraKPU1+suaraKPU2)%>
                       <td class="tg-0lax text-left" colspan="2">
                         <%var child = data.KP.parentIds;%>
-                          <strong><a href="/?child=[<%=next?next+','+KP[0]:KP[0]%>]"><%=KP[1]%></a><strong>
+                          <%if(hotlink[KP[0]]!= undefined){%>
+                            <strong><a href="/provinsi/<%=hotlink[KP[0]]['name']%>"><%=KP[1]%></a><strong>
+                          <%}else{%>
+                                <strong><a href="/?child=[<%=next?next+','+KP[0]:KP[0]%>]"><%=KP[1]%></a><strong>
+                              <%}%>
+
                 </td>
                 <%if(suaraKPJS1>suaraKPJS2){%>
                   <td class="tg-0lax text-right" style="background:#d4edda; font-weight:bold">
@@ -162,8 +167,8 @@
                         <%}%>
                         <div style="display:block">
                           <strong><%=numeral(suaraKPJS1).format(0,0)%></strong></div>
-                          <div style="display:block; font-size:10px;">(
-                            <%= parseFloat((suaraKPJS1/(suaraKPJS1+suaraKPJS2))*100).toPrecision(4)%> %)</div>
+                            <div style="display:block; font-size:10px;">(
+                              <%= parseFloat((suaraKPJS1/(suaraKPJS1+suaraKPJS2))*100).toPrecision(4)%> %)</div>
                       </td>
                       <%if(suaraKPJS1<suaraKPJS2){%>
                         <td class="tg-0lax text-right" style="background:#d4edda; font-weight:bold">
