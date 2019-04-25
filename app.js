@@ -3,13 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+const Sentry = require('@sentry/node');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var legislatif = require('./routes/electoral');
 var visual = require('./routes/visual');
-var app = express();
+Sentry.init({ dsn: 'https://e63bdf329ff54f3693cc109a28b50587@sentry.io/1446312' });
 
+var app = express();
+// The request handler must be the first middleware on the app
+app.use(Sentry.Handlers.requestHandler());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

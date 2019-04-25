@@ -43,7 +43,7 @@ function drawChartKPP(pas1, pas2) {
   var canvas = document.getElementById('KPP');
   var data = {
 
-    labels: ["JOKOWI-AMIN", "PRABOWO SANDI"],
+    labels: ["PRABOWO SANDI","JOKOWI-AMIN"],
     datasets: [{
       label: "Kawal Pemilu",
       backgroundColor: ['#dc3545', '#28a745'],

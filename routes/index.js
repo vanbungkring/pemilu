@@ -13,7 +13,7 @@ const async = require('async');
 
 /* GET home page. */
 
-router.get('/tps/summary/',cached, getTPSSummary)
+router.get('/tps/summary/', cached, getTPSSummary)
 
 function getTPSSummary(req, res) {
   res.render('tpsDetail', {
@@ -22,7 +22,7 @@ function getTPSSummary(req, res) {
     params: req.query.child
   });
 }
-router.get('/',cached, getInformation);
+router.get('/', getInformation);
 
 function cached(req, res, next) {
   var key = '0'
@@ -162,9 +162,9 @@ function getInformation(req, res) {
           strictSSL: false
         }, (err, res, body) => {
           if (err) {
-            //console.log(err);
             callback(err, null);
           } else {
+            console.log(body);
             const obj = {};
             for (const data of body) {
               var id = data.id;
@@ -194,12 +194,13 @@ function getInformation(req, res) {
     },
     function(err, results) {
       //console.log(results);
+      //
       if (!err) {
         var key = '0';
         if (typeof req.query.child != 'undefined') {
           key = req.query.child
         }
-        client.setex(key, 3600, JSON.stringify(results));
+        client.setex(key, 30, JSON.stringify(results));
       }
       console.log(results);
       render(results, req, res);
