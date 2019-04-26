@@ -269,7 +269,7 @@
                                               </td>
                                               <%}%>
                                                 <td class="tg-0lax text-right" style="background:#efefef">
-                                                  <strong><%=numeral(data.KP.data[parseInt(KP[0])]['sum']['cakupan']-data.KP.data[parseInt(KP[0])]['sum']['pending']).format(0,0) %></strong> dari <strong><%=numeral(KP[2]).format(0.0)%></strong>
+                                                  <strong><%=numeral(data.KP.data[parseInt(KP[0])]['sum']['cakupan']-data.KP.data[parseInt(KP[0])]['sum']['pending']-data.KP.data[parseInt(KP[0])]['sum']['janggal']).format(0,0) %></strong> dari <strong><%=numeral(KP[2]).format(0.0)%></strong>
                                                   <div class="progress">
                                                     <%var progress =parseFloat((parseFloat(data.KP.data[parseInt(KP[0])]['sum']['cakupan']-data.KP.data[parseInt(KP[0])]['sum']['pending'])/parseInt(KP[2]))*100).toPrecision(4)%>
                                                       <%var classing = progress>50?'bg-success':'bg-warning'%>
