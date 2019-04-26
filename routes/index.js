@@ -164,6 +164,7 @@ function getTPSSummary(req, res) {
   });
 }
 router.get('/', cached, getInformation);
+router.get('/:id/:id', cached, getInformation);
 
 function cached(req, res, next) {
   var key = '0'
