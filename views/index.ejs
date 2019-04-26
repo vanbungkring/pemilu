@@ -3,41 +3,44 @@
 
 <head>
 
-    <%if(title === 'Nasional'){%>
-        <title>Hasil perhitungan Realcount Pilpres 2019 seluruh wilayah Indonesia | Pilpres 2019</title>
-          <meta property="og:description" content="Hasil perhitungnan Pilpres 2019 seluruh Indonesia. Bandingkan hasil perolehan suara pemilihan presiden dan wakil presiden. Hemat waktumu sekarang!" />
-        <meta property="description" content="Hasil perhitungnan Pilpres 2019 seluruh Indonesia. Bandingkan hasil perolehan suara pemilihan presiden dan wakil presiden. Hemat waktumu sekarang!" />
+  <%if(title === 'Nasional'){%>
+    <title>Hasil perhitungan Realcount Pilpres 2019 seluruh wilayah Indonesia | Pilpres 2019</title>
+    <meta property="og:description" content="Hasil perhitungnan Pilpres 2019 seluruh Indonesia. Bandingkan hasil perolehan suara pemilihan presiden dan wakil presiden. Hemat waktumu sekarang!" />
+    <meta property="description" content="Hasil perhitungnan Pilpres 2019 seluruh Indonesia. Bandingkan hasil perolehan suara pemilihan presiden dan wakil presiden. Hemat waktumu sekarang!" />
     <%} else {%>
-        <title>Hasil perhitungnan Pilpres 2019  wilayah <%=title%> | Pilpres 2019</title>
-          <meta property="og:description" content="Hasil perhitungnan Pilpres 2019 seluruh wilayah <%=title%>. Bandingkan hasil perolehan suara pemilihan presiden dan wakil presiden. Hemat waktumu sekarang!" />
-        <meta property="description" content="Hasil perhitungnan Pilpres 2019 seluruh wilayah <%=title%>. Bandingkan hasil perolehan suara pemilihan presiden dan wakil presiden. Hemat waktumu sekarang!" />
+      <title>Hasil perhitungnan Pilpres 2019 wilayah
+        <%=title%> | Pilpres 2019</title>
+      <meta property="og:description" content="Hasil perhitungnan Pilpres 2019 seluruh wilayah <%=title%>. Bandingkan hasil perolehan suara pemilihan presiden dan wakil presiden. Hemat waktumu sekarang!" />
+      <meta property="description" content="Hasil perhitungnan Pilpres 2019 seluruh wilayah <%=title%>. Bandingkan hasil perolehan suara pemilihan presiden dan wakil presiden. Hemat waktumu sekarang!" />
       <%}%>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-  <meta property="og:type" content="article" />
-  <meta name="google-site-verification" content="WwyGS8jSbOz4_WDs-7FaBv4d8ES-1kuDTAJl2s61zUo">
-  <meta property="og:title" content="  <%=title%> - Hasil Real Count Pilpres 2019" />
-  <meta property="og:site_name" content="PEMILU AGREGATOR" />
-  <meta property="og:image" content="http://pemilu.masmadmad.com/images/data.jpg" />
-  <meta property="og:url" content="https://pemilu.masmadmad.com" />
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+        <meta property="og:type" content="article" />
+        <meta name="google-site-verification" content="WwyGS8jSbOz4_WDs-7FaBv4d8ES-1kuDTAJl2s61zUo">
+        <meta property="og:title" content="  <%=title%> - Hasil Real Count Pilpres 2019" />
+        <meta property="og:site_name" content="PEMILU AGREGATOR" />
+        <meta property="og:image" content="http://pemilu.masmadmad.com/images/data.jpg" />
+        <meta property="og:url" content="http://pemilu.masmadmad.com" />
 
-  <meta property="og:description" content="#bandingkan , antara kawal pemilu ,kawalpilpres2019 dan komisi pemilihan umum, Mari gotong royong, Pantau pemilu - Jaga Suara 2019" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <meta name="viewport" content="width=device-width">
-  <meta name="googlebot" content="index,follow" />
-  <meta name="author" content="@vanbungkring">
-  <meta name="robots" content="index, follow" />
-  <meta name="language" content="id" />
-  <meta name="keywords" content="hasil real count 2019,<%=data.KP.parentNames%>, Jokowi-Amin, Prabowo-Sandi">
-  <meta name="geo.country" content="id" />
-  <script>
-    window.dataLayer = window.dataLayer || [];
+        <meta property="og:description" content="#bandingkan , antara kawal pemilu ,kawalpilpres2019 dan komisi pemilihan umum, Mari gotong royong, Pantau pemilu - Jaga Suara 2019" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width">
+        <meta name="googlebot" content="index,follow" />
+        <meta name="author" content="@vanbungkring">
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="id" />
+        <meta name="keywords" content="hasil real count 2019,<%=data.KP.parentNames%>, Jokowi-Amin, Prabowo-Sandi">
+        <meta name="geo.country" content="id" />
+        <meta name="twitter:creator" content="@fastworxid" />
 
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'UA-138792337-1');
-  </script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'UA-138792337-1');
+        </script>
 
 </head>
 <style media="screen">
