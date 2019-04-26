@@ -1,6 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+var jwt = require('jsonwebtoken');
 //var agenda = require('./agenda');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -10,7 +11,7 @@ var usersRouter = require('./routes/users');
 var newIndex = require('./routes/newIndex');
 var tpsDetail = require('./routes/tpssummary');
 var legislatif = require('./routes/electoral');
-var wilayah = require ('./routes/wilayah');
+var wilayah = require('./routes/wilayah');
 var visual = require('./routes/visual');
 Sentry.init({
   dsn: 'https://e63bdf329ff54f3693cc109a28b50587@sentry.io/1446312'
@@ -37,13 +38,18 @@ app.use('/v2', newIndex);
 app.use('/visual', visual);
 app.use('/dapil3', usersRouter);
 app.use('/legislatif/', legislatif);
+app.use('/tps/wilayah/', tpsDetail);
 app.use('/tps/detail/', tpsDetail);
-app.use('/tps/wilayah/', wilayah);
+app.use('/tps/daerah/', wilayah);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
+app.locals.hash_helper = function(hashed) {
+  return jwt.sign({
+    data: hashed
+  }, 'VANBUNGKRING');
+};
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

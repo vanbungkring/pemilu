@@ -4,6 +4,8 @@ var router = express.Router();
 const PARTAI = require('../static/partai');
 var DAPIL = 'https://pemilu2019.kpu.go.id/static/json/dapil/dprri.json?' + new Date().getTime()
 var HASIL = 'https://pemilu2019.kpu.go.id/static/json/hhcd/0.json'
+const DAPIL_STATIC = require('../static/dapil');
+const PARTAI_STATIC = require('../static/partai');
 const request = require('request');
 const numeral = require('numeral');
 const async = require('async');
@@ -11,19 +13,10 @@ const async = require('async');
 router.get('/', function(req, res, next) {
   async.parallel({
     PARTAI: function(callback) {
-      callback(null,PARTAI);
+      callback(null, PARTAI);
     },
     DAPIL: function(callback) {
-      request(DAPIL, {
-        json: true,
-        strictSSL: false
-      }, (err, res, body) => {
-        if (err) {
-          callback(err, null);
-        } else {
-          callback(null, body);
-        }
-      });
+      return (DAPIL_STATIC);
     },
     HASIL: function(callback) {
       request(HASIL, {

@@ -96,6 +96,7 @@
                   </a>
                 </li>
                 <%} else{%>
+                  
                   <li class="breadcrumb-item">
                     <a href="/?child=[<%=next.slice(0, -1)%>]">
                       <%=data.KP.parentNames[i]%>
@@ -193,10 +194,17 @@
                               <%if(hotlink[KP[0]]!= undefined){%>
                                 <strong><a href="/provinsi/<%=hotlink[KP[0]]['name']%>"><%=KP[1]%></a><strong>
                                   <%}else{%>
-                              <%if(next.length>2){%>
+                              <%if(next.length>3){%>
                                       <strong><a href="/tps/detail/<%=data.KP.parentNames[1].replace(/ /g, "-").toLowerCase()%>/<%=data.KP.name.toLowerCase()%>/<%=KP[1].toLowerCase()%>?child=[<%=next?next+','+KP[0]:KP[0]%>]"><%=KP[1]%></a><strong>
                                   <%} else{%>
-                                    <strong><a href="/?child=[<%=next?next+','+KP[0]:KP[0]%>]"><%=KP[1]%></a><strong>
+                                    <%var link = "/tps/daerah"%>
+                                    <%for(var i=0;i<data.KP.parentNames.length;i++){%>
+                                      <%if(i>0){%>
+                                      <%link += '/'+data.KP.parentNames[i].replace(/ /g, "-").toLowerCase()%>
+                                        <%}%>
+                                    <%}%>
+                                    <%link +='/'+KP[1].replace(/ /g, "-").toLowerCase()%>
+                                    <strong><a href="<%=link%>/<%=hash_helper(next?next+','+KP[0]:KP[0])%>"><%=KP[1]%></a><strong>
                                       <%}%>
 
                               <%}%>
