@@ -246,7 +246,7 @@
                                     <div style="display:block; font-size:10px;">(
                                       <%= parseFloat((suaraKPJS2/(suaraKPJS1+suaraKPJS2))*100).toPrecision(4)%> %)</div>
                                 </td>
-                                <%if(data.KP.data[parseInt(KP[0])]['sum']['cakupan']===KP[2]){%>
+                                <%if(data.KP.data[parseInt(KP[0])]['sum']['cakupan']-data.KP.data[parseInt(KP[0])]['sum']['janggal']--data.KP.data[parseInt(KP[0])]['sum']['pending']===KP[2]){%>
                                   <%var total_suara_sah = parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas1'])+parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas2'])%>
                                     <%var total_suara_sah_kpu = parseInt(data.KPU.table[parseInt(KP[0])]['21'])+parseInt(data.KPU.table[parseInt(KP[0])]['22'])%>
                                       <%if(total_suara_sah !=total_suara_sah_kpu) {%>
@@ -257,7 +257,6 @@
                                         </td>
                                         <%} else{%>
                                           <td class="tg-0lax text-right alert-success">
-
                                             <strong><%=numeral(parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas1'])+parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas2'])).format(0,0)%></strong>
                                             <div class="display:block">(0)</div>
                                           </td>
