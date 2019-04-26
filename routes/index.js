@@ -12,8 +12,12 @@ const PROVINSI_STATIC = require('../static/provinsi');
 const PROVINSI_ID_STATIC = require('../static/provinsiid');
 const numeral = require('numeral');
 const async = require('async');
-
+const SitemapGenerator = require('sitemap-generator');
 /* GET home page. */
+router.get('/sitemap',function(req,res){
+
+
+})
 router.get('/provinsi/:id', cached, baseOnProvince)
 router.get('/generator', generateProvinsi);
 
