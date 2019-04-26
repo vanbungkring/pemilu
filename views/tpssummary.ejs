@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%=title%> - KAWALPEMILU X KOMISI PEMILIHAN UMUM
+  </title>
+  <meta property="description" content="#Bandingkan , antara kawal pemilu x komisi pemilihan umum x kawalpilpres2019, Mari gotong royong, Pantau pemilu - Jaga Suara 2019 " />
+
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="  <%=title%> - KAWALPEMILU X KOMISI PEMILIHAN UMUM" />
+  <meta property="og:site_name" content="PEMILU AGREGATOR" />
+  <meta property="og:image" content="http://pemilu.masmadmad.com/images/data.jpg" />
+  <meta property="og:url" content="https://pemilu.masmadmad.com" />
+  <meta property="og:description" content="#bandingkan , antara kawal pemilu ,kawalpilpres2019 dan komisi pemilihan umum, Mari gotong royong, Pantau pemilu - Jaga Suara 2019" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</head>
+<style media="screen">
+  .progress {
+    background-color: #ccc !important;
+  }
+
+  table {
+    font-size: small;
+    vertical-align: middle;
+  }
+</style>
+
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="/">mas-madmad</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Beranda <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://kawalpemilu.org">Kawal Pemilu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://kpu.go.id">Komisi Pemilihan Umum</a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+  <div class="container-fluid" style="margin-top:40px">
+    <h1>Hasil Tabulasi Realtime Jaga suara 2019 (Kawal Pemilu & KPU)</h1>
+    <p>Situs ini mengagregasi Suara dari 2 sumber yaitu kawalpemilu.org dan situs resmi KPU
+    </p>
+    <div class="alert alert-danger">
+      <p>Semua table informasi di bawah ini merupakan kurasi dari situs kawalpemilu dan Official Resmi Dari KPU, <strong>dan untuk Data pada halaman ini masih belum final dan akan terus diperbarui secara berkala!</strong>
+      </p>
+      <h5>Latest Update: <%=data.KPU.ts%></h5>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <br>
+        <div class="col-md-6">
+          <div id="KPJS"></div>
+          </br>
+        </div>
+        <div class="col-md-6">
+          <div id="KPU"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%if(data.KP.parentIds.length){%>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <% for(var i=0;i<data.KP.parentIds.length;i++){%>
+          <%if(i==0){%>
+            <li class="breadcrumb-item"><a href="/">NASIONAL</a></li>
+            <%}else{%>
+              <%if(hotlink[[data.KP.parentIds[i]]]!= undefined){%>
+                <li class="breadcrumb-item">
+                  <a href="/provinsi/<%=hotlink[data.KP.parentIds[i]]['name']%>">
+                    <%=data.KP.parentNames[i]%>
+                  </a>
+                </li>
+                <%} else{%>
+                  <li class="breadcrumb-item">
+                    <a href="/?child=[<%=next.slice(0, -1)%>]">
+                      <%=data.KP.parentNames[i]%>
+                    </a>
+                  </li>
+                  <%}%>
+
+                    <%}%>
+                      <%}%>
+                        <li class="breadcrumb-item">
+                          <%=data.KP.name%>
+                        </li>
+      </ol>
+    </nav>
+    <%}%>
+      <table class="table table-bordered table-sm table-hover" id="app">
+        <tr style="background:#000;color:#fff;text-align:center;vertical-align:top">
+          <th class="tg-wy7m" colspan="2">Nomor TPS</th>
+          <th class="tg-s9og" colspan="5" style="background:#37474f">Kawal Pemilu </th>
+          <th class="tg-1sci" colspan="3">Komisi Pemilihan Umum</th>
+        </tr>
+        <tr style="background-color:#333333;color:#ffffff;text-align:center;vertical-align:top">
+          <td class="tg-7f7m" colspan="2">Keterangan</td>
+          <td class="tg-7f7m" style="background:#37474f">Jokowi-Amin </td>
+          <td class="tg-7f7m" style="background:#37474f">Prabowo-Sandi</td>
+          <td class="tg-7f7m" style="background:#37474f">
+            <div style="display:block;">Suara Sah</div>
+          </td>
+          <td class="tg-7f7m">Jokowi-Amin
+            <td class="tg-7f7m">Prabowo-Sandi</td>
+            <td class="tg-7f7m">
+              <div style="display:block;">Total</div>
+              <div style="display:block;font-size:10px">(Suara Sah)</div>
+            </td>
+        </tr>
+        <%data.KP.children.forEach(function(KP,index){%>
+          <tr>
+            <th scope="row" colspan="2">
+              <%=KP[0]%>
+            </th>
+            <td>
+              <%=data.KP.data[KP[0]]!=undefined?data.KP.data[KP[0]]['sum']['pas1']:0%>
+            </td>
+            <td>
+              <%=data.KP.data[KP[0]]!=undefined?data.KP.data[KP[0]]['sum']['pas2']:0%>
+            </td>
+            <%var suara_sah_kp = data.KP.data[KP[0]]!=undefined?parseInt(data.KP.data[KP[0]]['sum']['sah']):0; var suara_sah_kpu = data.KPU!=undefined?parseInt(Object.values(data.KPU.table)[index]['21'])+parseInt(Object.values(data.KPU.table)[index]['22']):0%>
+              <%if(suara_sah_kp!=suara_sah_kpu){%>
+                <td class="alert-danger text-right">
+                  <strong><%=suara_sah_kp%></strong>
+                  <div class="display:block">(
+                    <%= parseInt(suara_sah_kpu-suara_sah_kp) %>)</div>
+
+                </td>
+                <%} else{%>
+                  <td class="alert-success text-right">
+                    <strong><%=suara_sah_kp%></strong>
+                    <div class="display:block">(0)</div>
+                  </td>
+                  <%}%>
+                    <td>
+                      <%=data.KPU!=undefined?Object.values(data.KPU.table)[index]['21']:0%>
+                    </td>
+                    <td>
+                      <%=data.KPU!=undefined?Object.values(data.KPU.table)[index]['22']:0%>
+                    </td>
+                    <td>
+                      <%=suara_sah_kpu%>
+                    </td>
+          </tr>
+          <%})%>
+      </table>
+      <h1>Catatan</h1>
+      <ul>
+        <li>Data diatas bersifat sementara selama masa perhitungan suara pemilu</li>
+        <li>
+          <p>
+            <span class="th">#TPS terproses</span> berisi
+            <strong>ESTIMASI</strong> jumlah TPS yang sudah memiliki foto dan sudah diproses datanya. Kami hanya dapat menampilkan angka estimasi karena satu TPS yang sama memiliki beberapa foto dimana sebagian sudah diproses dan sebagian lain belum diproses.
+          </p>
+          <p>
+            Kawal Pemilu menerima lebih dari satu foto per TPS selain untuk mendapatkan bukti foto pendukung, juga karena Kawal Pemilu menerima dan memproses foto terkait pemilu DPR, DPD, DPRD Provinsi, dan DPRD Kabupaten/Kota.
+          </p>
+        </li>
+      </ul>
+
+</body>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-138792337-1"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="/javascripts/apps.js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'UA-138792337-1');
+</script>
+
+</html>

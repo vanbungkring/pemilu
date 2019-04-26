@@ -8,6 +8,7 @@ const Sentry = require('@sentry/node');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var newIndex = require('./routes/newIndex');
+var tpsDetail = require('./routes/tpssummary');
 var legislatif = require('./routes/electoral');
 var visual = require('./routes/visual');
 Sentry.init({
@@ -35,6 +36,7 @@ app.use('/v2', newIndex);
 app.use('/visual', visual);
 app.use('/dapil3', usersRouter);
 app.use('/legislatif/', legislatif);
+app.use('/tps/detail/', tpsDetail);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

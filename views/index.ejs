@@ -186,7 +186,7 @@
                                 <strong><a href="/provinsi/<%=hotlink[KP[0]]['name']%>"><%=KP[1]%></a><strong>
                           <%}else{%>
                               <%if(next.length>2){%>
-                                  <strong><%=KP[1]%><strong>
+                                      <strong><a href="/tps/detail/<%=data.KP.parentNames[1].replace(/ /g, "-").toLowerCase()%>/<%=data.KP.name.toLowerCase()%>/<%=KP[1].toLowerCase()%>?child=[<%=next?next+','+KP[0]:KP[0]%>]"><%=KP[1]%></a><strong>
                                   <%} else{%>
                                     <strong><a href="/?child=[<%=next?next+','+KP[0]:KP[0]%>]"><%=KP[1]%></a><strong>
                                       <%}%>
@@ -217,57 +217,58 @@
                                 </td>
                                 <%if(data.KP.data[parseInt(KP[0])]['sum']['cakupan']===KP[2]){%>
                                   <%var total_suara_sah = parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas1'])+parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas2'])%>
-                                  <%var total_suara_sah_kpu = parseInt(data.KPU.table[parseInt(KP[0])]['21'])+parseInt(data.KPU.table[parseInt(KP[0])]['22'])%>
-                                  <%if(total_suara_sah !=total_suara_sah_kpu) {%>
-                                    <td class="tg-0lax text-right alert-danger">
-                                      <strong><%=numeral(parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas1'])+parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas2'])).format(0,0)%></strong>
-                                        <div class="display:block">(<%= total_suara_sah_kpu-total_suara_sah %>)</div>
-                                    </td>
-                                      <%} else{%>
+                                    <%var total_suara_sah_kpu = parseInt(data.KPU.table[parseInt(KP[0])]['21'])+parseInt(data.KPU.table[parseInt(KP[0])]['22'])%>
+                                      <%if(total_suara_sah !=total_suara_sah_kpu) {%>
+                                        <td class="tg-0lax text-right alert-danger">
+                                          <strong><%=numeral(parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas1'])+parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas2'])).format(0,0)%></strong>
+                                          <div class="display:block">(
+                                            <%= total_suara_sah_kpu-total_suara_sah %>)</div>
+                                        </td>
+                                        <%} else{%>
                                           <td class="tg-0lax text-right alert-success">
 
                                             <strong><%=numeral(parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas1'])+parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas2'])).format(0,0)%></strong>
-                                                <div class="display:block">(0)</div>
+                                            <div class="display:block">(0)</div>
                                           </td>
-                                      <%}%>
+                                          <%}%>
 
-                                <%} else{%>
-                                  <td class="tg-0lax text-right" style="background:#efefef">
-                                    <strong><%=numeral(parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas1'])+parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas2'])).format(0,0)%></strong>
-                                  </td>
-                                  <%}%>
-                                <td class="tg-0lax text-right" style="background:#efefef">
-                                  <strong><%=numeral(data.KP.data[parseInt(KP[0])]['sum']['cakupan']).format(0,0) %></strong> dari <strong><%=numeral(KP[2]).format(0.0)%></strong>
-                                  <div class="progress">
-                                    <%var progress =parseFloat((parseFloat(data.KP.data[parseInt(KP[0])]['sum']['cakupan'])/parseInt(KP[2]))*100).toPrecision(4)%>
-                                      <%var classing = progress>50?'bg-success':'bg-warning'%>
-                                        <div class="progress-bar <%=classing%>" role="progressbar" style="width: <%=progress%>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="<%=parseInt(KP[2])%>"></div>
-                                  </div><small><strong><%= progress %>% </strong> estimasi tps terproses</small>
-
-                                </td>
-
-                                <%if(suaraKPU1>suaraKPU2){%>
-                                  <td class="tg-0lax text-right" style="background:#d4edda; font-weight:bold">
-                                    <%}else{%>
-                                      <td class="tg-0lax text-right " style="background:#efefef">
-                                        <%}%>
-                                          <strong><%=numeral(data.KPU.table[parseInt(KP[0])]['21']).format(0,0)%></strong>
-                                          <div style="display:block; font-size:10px;">(
-                                            <%= parseFloat((data.KPU.table[parseInt(KP[0])]['21']/(data.KPU.table[parseInt(KP[0])]['21']+data.KPU.table[parseInt(KP[0])]['22']))*100).toPrecision(4)%> %)</div>
-                                      </td>
-
-                                      <%if(suaraKPU1<suaraKPU2){%>
-                                        <td class="tg-0lax text-right" style="background:#d4edda; font-weight:bold">
-                                          <%}else{%>
-                                            <td class="tg-0lax text-right" style="background:#efefef">
+                                            <%} else{%>
+                                              <td class="tg-0lax text-right" style="background:#efefef">
+                                                <strong><%=numeral(parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas1'])+parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas2'])).format(0,0)%></strong>
+                                              </td>
                                               <%}%>
-                                                <strong><%=numeral(data.KPU.table[parseInt(KP[0])]['22']).format(0,0)%></strong>
-                                                <div style="display:block; font-size:10px;">(
-                                                  <%= parseFloat((data.KPU.table[parseInt(KP[0])]['22']/(data.KPU.table[parseInt(KP[0])]['21']+data.KPU.table[parseInt(KP[0])]['22']))*100).toPrecision(4)%> %)</div>
-                                            </td>
-                                            <td class="tg-0lax text-right" style="background:#efefef">
-                                              <%=numeral(parseInt(data.KPU.table[parseInt(KP[0])]['21'])+parseInt(data.KPU.table[parseInt(KP[0])]['22'])).format(0,0)%>
-                                            </td>
+                                                <td class="tg-0lax text-right" style="background:#efefef">
+                                                  <strong><%=numeral(data.KP.data[parseInt(KP[0])]['sum']['cakupan']-data.KP.data[parseInt(KP[0])]['sum']['pending']).format(0,0) %></strong> dari <strong><%=numeral(KP[2]).format(0.0)%></strong>
+                                                  <div class="progress">
+                                                    <%var progress =parseFloat((parseFloat(data.KP.data[parseInt(KP[0])]['sum']['cakupan']-data.KP.data[parseInt(KP[0])]['sum']['pending'])/parseInt(KP[2]))*100).toPrecision(4)%>
+                                                      <%var classing = progress>50?'bg-success':'bg-warning'%>
+                                                        <div class="progress-bar <%=classing%>" role="progressbar" style="width: <%=progress%>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="<%=parseInt(KP[2])%>"></div>
+                                                  </div><small><strong><%= progress %>% </strong> estimasi tps terproses</small>
+
+                                                </td>
+
+                                                <%if(suaraKPU1>suaraKPU2){%>
+                                                  <td class="tg-0lax text-right" style="background:#d4edda; font-weight:bold">
+                                                    <%}else{%>
+                                                      <td class="tg-0lax text-right " style="background:#efefef">
+                                                        <%}%>
+                                                          <strong><%=numeral(data.KPU.table[parseInt(KP[0])]['21']).format(0,0)%></strong>
+                                                          <div style="display:block; font-size:10px;">(
+                                                            <%= parseFloat((data.KPU.table[parseInt(KP[0])]['21']/(data.KPU.table[parseInt(KP[0])]['21']+data.KPU.table[parseInt(KP[0])]['22']))*100).toPrecision(4)%> %)</div>
+                                                      </td>
+
+                                                      <%if(suaraKPU1<suaraKPU2){%>
+                                                        <td class="tg-0lax text-right" style="background:#d4edda; font-weight:bold">
+                                                          <%}else{%>
+                                                            <td class="tg-0lax text-right" style="background:#efefef">
+                                                              <%}%>
+                                                                <strong><%=numeral(data.KPU.table[parseInt(KP[0])]['22']).format(0,0)%></strong>
+                                                                <div style="display:block; font-size:10px;">(
+                                                                  <%= parseFloat((data.KPU.table[parseInt(KP[0])]['22']/(data.KPU.table[parseInt(KP[0])]['21']+data.KPU.table[parseInt(KP[0])]['22']))*100).toPrecision(4)%> %)</div>
+                                                            </td>
+                                                            <td class="tg-0lax text-right" style="background:#efefef">
+                                                              <%=numeral(parseInt(data.KPU.table[parseInt(KP[0])]['21'])+parseInt(data.KPU.table[parseInt(KP[0])]['22'])).format(0,0)%>
+                                                            </td>
             </tr>
 
             <%})%>
