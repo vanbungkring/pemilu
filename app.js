@@ -10,6 +10,7 @@ var usersRouter = require('./routes/users');
 var newIndex = require('./routes/newIndex');
 var tpsDetail = require('./routes/tpssummary');
 var legislatif = require('./routes/electoral');
+var wilayah = require ('./routes/wilayah');
 var visual = require('./routes/visual');
 Sentry.init({
   dsn: 'https://e63bdf329ff54f3693cc109a28b50587@sentry.io/1446312'
@@ -37,6 +38,7 @@ app.use('/visual', visual);
 app.use('/dapil3', usersRouter);
 app.use('/legislatif/', legislatif);
 app.use('/tps/detail/', tpsDetail);
+app.use('/tps/wilayah/', wilayah);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
