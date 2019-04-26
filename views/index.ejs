@@ -215,10 +215,27 @@
                                     <div style="display:block; font-size:10px;">(
                                       <%= parseFloat((suaraKPJS2/(suaraKPJS1+suaraKPJS2))*100).toPrecision(4)%> %)</div>
                                 </td>
-                                <td class="tg-0lax text-right" style="background:#efefef">
-                                  <strong><%=numeral(parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas1'])+parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas2'])).format(0,0)%></strong>
+                                <%if(data.KP.data[parseInt(KP[0])]['sum']['cakupan']===KP[2]){%>
+                                  <%var total_suara_sah = parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas1'])+parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas2'])%>
+                                  <%var total_suara_sah_kpu = parseInt(data.KPU.table[parseInt(KP[0])]['21'])+parseInt(data.KPU.table[parseInt(KP[0])]['22'])%>
+                                  <%if(total_suara_sah !=total_suara_sah_kpu) {%>
+                                    <td class="tg-0lax text-right alert-danger">
+                                      <strong><%=numeral(parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas1'])+parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas2'])).format(0,0)%></strong>
+                                        <div class="display:block">(<%= total_suara_sah_kpu-total_suara_sah %>)</div>
+                                    </td>
+                                      <%} else{%>
+                                          <td class="tg-0lax text-right alert-success">
 
-                                </td>
+                                            <strong><%=numeral(parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas1'])+parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas2'])).format(0,0)%></strong>
+                                                <div class="display:block">(0)</div>
+                                          </td>
+                                      <%}%>
+
+                                <%} else{%>
+                                  <td class="tg-0lax text-right" style="background:#efefef">
+                                    <strong><%=numeral(parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas1'])+parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas2'])).format(0,0)%></strong>
+                                  </td>
+                                  <%}%>
                                 <td class="tg-0lax text-right" style="background:#efefef">
                                   <strong><%=numeral(data.KP.data[parseInt(KP[0])]['sum']['cakupan']).format(0,0) %></strong> dari <strong><%=numeral(KP[2]).format(0.0)%></strong>
                                   <div class="progress">
