@@ -13,8 +13,23 @@ const PROVINSI_ID_STATIC = require('../static/provinsiid');
 const numeral = require('numeral');
 const async = require('async');
 
-router.get('/:id/:id2/:id3', getInfo);
-
+router.get('/:id/:id2/:id3', cached,getInfo);
+function cached(req, res, next) {
+  var key = '0'
+  if (typeof req.query.child != 'undefined') {
+    key = req.query.child
+  }
+  client.get(key, function(err, data) {
+    if (err) {
+      next();
+    };
+    if (data != null) {
+      return render(JSON.parse(data), req, res)
+    } else {
+      next();
+    }
+  });
+}
 function getInfo(req, res) {
   var KPU_URL = 'https://pemilu2019.kpu.go.id/static/json/hhcw/ppwp.json'
   current_page = 0;
@@ -61,6 +76,13 @@ function getInfo(req, res) {
       }
     },
     function(err, results) {
+      if (!err) {
+        var key = '0';
+        if (typeof req.query.child != 'undefined') {
+          key = req.query.child
+        }
+        client.setex(key, 7200, JSON.stringify(results));
+      }
       render(results, req, res)
     });
 }
