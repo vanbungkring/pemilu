@@ -298,7 +298,11 @@
                                                                   <%= parseFloat((data.KPU.table[parseInt(KP[0])]['22']/(data.KPU.table[parseInt(KP[0])]['21']+data.KPU.table[parseInt(KP[0])]['22']))*100).toPrecision(4)%> %)</div>
                                                             </td>
                                                             <td class="tg-0lax text-right" style="background:#efefef">
-                                                              <%=numeral(parseInt(data.KPU.table[parseInt(KP[0])]['21'])+parseInt(data.KPU.table[parseInt(KP[0])]['22'])).format(0,0)%>
+                                                              <strong><%=numeral(parseInt(data.KPU.table[parseInt(KP[0])]['21'])+parseInt(data.KPU.table[parseInt(KP[0])]['22'])).format(0,0)%></strong>
+                                                              <div class="progress">
+                                                                <%var progress_kpu_persen =parseFloat(data.KPU.table[parseInt(KP[0])]['persen']).toPrecision(4)%>
+                                                                  <%var classing = progress_kpu_persen>50?'bg-success':'bg-warning'%>
+                                                                    <div class="progress-bar <%=classing%>" role="progressbar" style="width: <%=progress_kpu_persen%>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div></div><small><strong><%= progress %>% </strong> estimasi tps terproses</small>
                                                             </td>
             </tr>
 
