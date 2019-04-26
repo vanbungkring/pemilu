@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var PARTAI = 'https://pemilu2019.kpu.go.id/static/json/partai.json?' + new Date().getTime()
+//var PARTAI = 'https://pemilu2019.kpu.go.id/static/json/partai.json?' + new Date().getTime()
+const PARTAI = require('../static/partai');
 var DAPIL = 'https://pemilu2019.kpu.go.id/static/json/dapil/dprri.json?' + new Date().getTime()
 var HASIL = 'https://pemilu2019.kpu.go.id/static/json/hhcd/0.json'
 const request = require('request');
@@ -10,16 +11,7 @@ const async = require('async');
 router.get('/', function(req, res, next) {
   async.parallel({
     PARTAI: function(callback) {
-      request(PARTAI, {
-        json: true,
-        strictSSL: false
-      }, (err, res, body) => {
-        if (err) {
-          callback(err, null);
-        } else {
-          callback(null, body);
-        }
-      });
+      callback(null,PARTAI);
     },
     DAPIL: function(callback) {
       request(DAPIL, {
