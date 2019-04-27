@@ -5,13 +5,13 @@
 
   <%if(title === 'Nasional'){%>
     <title>Hasil perhitungan Realcount Pilpres 2019 seluruh wilayah Indonesia | Pilpres 2019</title>
-    <meta property="og:description" content="Hasil perhitungnan Pilpres 2019 seluruh Indonesia. Bandingkan hasil perolehan suara pemilihan presiden dan wakil presiden. Hemat waktumu sekarang!" />
-    <meta property="description" content="Hasil perhitungnan Pilpres 2019 seluruh Indonesia. Bandingkan hasil perolehan suara pemilihan presiden dan wakil presiden. Hemat waktumu sekarang!" />
+    <meta property="og:description" content="Hasil perhitungan Pilpres 2019 seluruh Indonesia. Bandingkan hasil perolehan suara pemilihan presiden dan wakil presiden. Hemat waktumu sekarang!" />
+    <meta property="description" content="Hasil perhitungan Pilpres 2019 seluruh Indonesia. Bandingkan hasil perolehan suara pemilihan presiden dan wakil presiden. Hemat waktumu sekarang!" />
     <%} else {%>
-      <title>Hasil perhitungnan Pilpres 2019 wilayah
+      <title>Hasil perhitungan Pilpres 2019 wilayah
         <%=title%> | Pilpres 2019</title>
-      <meta property="og:description" content="Hasil perhitungnan Pilpres 2019 seluruh wilayah <%=title%>. Bandingkan hasil perolehan suara pemilihan presiden dan wakil presiden. Hemat waktumu sekarang!" />
-      <meta property="description" content="Hasil perhitungnan Pilpres 2019 seluruh wilayah <%=title%>. Bandingkan hasil perolehan suara pemilihan presiden dan wakil presiden. Hemat waktumu sekarang!" />
+      <meta property="og:description" content="Hasil perhitungan Pilpres 2019 seluruh wilayah <%=title%>. Bandingkan hasil perolehan suara pemilihan presiden dan wakil presiden. Hemat waktumu sekarang!" />
+      <meta property="description" content="Hasil perhitungan Pilpres 2019 seluruh wilayah <%=title%>. Bandingkan hasil perolehan suara pemilihan presiden dan wakil presiden. Hemat waktumu sekarang!" />
       <%}%>
         <link rel='stylesheet' href='/stylesheets/style.css' />
         <meta property="og:type" content="article" />
@@ -301,7 +301,7 @@
                                                               <div class="progress">
                                                                 <%var progress_kpu_persen =parseFloat(data.KPU.table[parseInt(KP[0])]['persen']).toPrecision(4)%>
                                                                   <%var classing = progress_kpu_persen>50?'bg-success':'bg-warning'%>
-                                                                  
+
                                                                     <div class="progress-bar <%=classing%>" role="progressbar" style="width: <%=parseFloat(progress_kpu_persen)%>%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div><small><strong><%= progress_kpu_persen %>% </strong> estimasi tps terproses</small>
                                                             </td>
             </tr>
