@@ -78,16 +78,7 @@
       <h5>Latest Update: <%=data.KPU.ts%></h5>
     </div>
     <div class="container-fluid">
-      <div class="row">
-        <br>
-        <div class="col-md-6">
-          <div id="KPJS"></div>
-          </br>
-        </div>
-        <div class="col-md-6">
-          <div id="KPU"></div>
-        </div>
-      </div>
+
     </div>
   </div>
   <%if(data.KP.parentIds.length){%>
@@ -119,67 +110,146 @@
       </ol>
     </nav>
     <%}%>
-      <table class="table table-bordered table-sm table-hover" id="app">
-        <tr style="background:#000;color:#fff;text-align:center;vertical-align:top">
-          <th class="tg-wy7m">Nomor TPS</th>
-          <th class="tg-s9og" colspan="5" style="background:#37474f">Kawal Pemilu </th>
-          <th class="tg-1sci" colspan="3">Komisi Pemilihan Umum</th>
-        </tr>
-        <tr style="background-color:#333333;color:#ffffff;text-align:center;vertical-align:top">
-          <td class="tg-7f7m">Keterangan</td>
-          <td class="tg-7f7m" style="background:#37474f">Jokowi-Amin </td>
-          <td class="tg-7f7m" style="background:#37474f">Prabowo-Sandi</td>
-          <td class="tg-7f7m" style="background:#37474f">
-            <div style="display:block;">Suara Sah</div>
-          </td>
-          <td class="tg-7f7m">Jokowi-Amin
-            <td class="tg-7f7m">Prabowo-Sandi</td>
-            <td class="tg-7f7m">
-              <div style="display:block;">Total</div>
-              <div style="display:block;font-size:10px">(Suara Sah)</div>
-            </td>
-        </tr>
-        <%data.KP.children.forEach(function(KP,index){%>
-          <tr>
-            <th scope="row">
-              <a href="/tps/detail/<%=data.KP.id%>/<%=KP[0]%>/<%=Object.keys(data.KPU.table)[index]%>/<%=hash_helper(next?next+','+Object.keys(data.KPU.table)[index]:Object.keys(data.KPU.table)[index])%>" title="tps <%=KP[0]%> kelurahan <%=data.KP.name%>">
-                <%=KP[0]%>
-              </a>
-            </th>
-            <td>
-              <%=data.KP.data[KP[0]]!=undefined?data.KP.data[KP[0]]['sum']['pas1']:0%>
-            </td>
-            <td>
-              <%=data.KP.data[KP[0]]!=undefined?data.KP.data[KP[0]]['sum']['pas2']:0%>
-            </td>
 
-            <%var suara_sah_kp = data.KP.data[KP[0]]!=undefined?parseInt(data.KP.data[KP[0]]['sum']['sah']):0; var suara_sah_kpu = data.KPU!=undefined?parseInt(Object.values(data.KPU.table)[index]['21'])+parseInt(Object.values(data.KPU.table)[index]['22']):0%>
-              <%if(suara_sah_kp!=suara_sah_kpu){%>
-                <td class="alert-danger text-right">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              Data KAWALPEMILU
+            </div>
+            <div class="card-body">
+              <%if(data.KP.data[tps_kp]){%>
+                <h5 class="card-title">DATA PEROLEHAN SUARA</h5>
+                <table class="table table-hover table-bordered table-stripped table-condensed">
+                  <tr class="bg-dark">
+                    <th colspan="2" class="text-light">
+                      URAIAN
+                    </th>
+                    <th class="text-light">SUARA SAH </th>
+                  </tr>
+                  <tr>
+                    <td width="30">1</td>
+                    <td>(01) Ir. H. JOKO WIDODO - Prof. Dr. (H.C) KH. MA'RUF AMIN</td>
+                    <td width="150" class="number">
+                      <%=data.KP.data[tps_kp]?data.KP.data[tps_kp]['sum']['pas1']:0%>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="30">2</td>
+                    <td>(02) H. PRABOWO SUBIANTO - H. SANDIAGA SALAHUDIN UNO</td>
+                    <td width="150" class="number">
+                        <%=data.KP.data[tps_kp]?data.KP.data[tps_kp]['sum']['pas2']:0%>
+                    </td>
+                  </tr>
+                </table>
+                <h5 class="card-title">GAMBAR C1 Plano</h5>
+                <%var images_tps_kp =data.KP.data[tps_kp]['photos']?Object.keys(data.KP.data[tps_kp]['photos']):[]%>
+                  <%for(var i=0;i<images_tps_kp.length;i++){%>
+                    <div class="thumbnail"> <a href="<%=images_tps_kp[0]%>" target="_blank">
+                    <img src="<%=images_tps_kp[0]%>" class="rounded rounded float-left" alt="..." width="220px;" style="margin-right:10px;">
+                    </a>
+                    </div>
+                    <%}%>
+                    <%} else{%>
+                      <div class="alert alert-danger" role="alert">
+          Belum ada data dari Kawal Pemilu
+        </div>
+                        <%}%>
+            </div>
+          </div>
+        </div>
 
-                  <strong><%=suara_sah_kp%></strong>
-                  <div class="display:block">(
-                    <%= parseInt(suara_sah_kpu-suara_sah_kp) %>)</div>
-
-                </td>
-                <%} else{%>
-                  <td class="alert-success text-right">
-                    <strong><%=suara_sah_kp%></strong>
-                    <div class="display:block">(0)</div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              Data KPU
+            </div>
+            <div class="card-body">
+              <%if(data.KPU && data.KPU.chart){%>
+              <h5 class="card-title">DATA PEMILIH DAN PENGGUNAAN HAK PILIH</h5>
+              <table class="table table-hover table-bordered table-stripped table-condensed">
+                <tr class="bg-dark">
+                  <th class="text-light">URAIAN</th>
+                  <th class="text-light">JUMLAH (L+P)</th>
+                </tr>
+                <tr>
+                  <td>PEMILIH TERDAFTAR (DPT)</td>
+                  <td width="150" class="number">
+                    <%=data.KPU.pemilih_j%>
                   </td>
-                  <%}%>
-                    <td>
-                      <%=data.KPU!=undefined?Object.values(data.KPU.table)[index]['21']:0%>
-                    </td>
-                    <td>
-                      <%=data.KPU!=undefined?Object.values(data.KPU.table)[index]['22']:0%>
-                    </td>
-                    <td>
-                      <%=suara_sah_kpu%>
-                    </td>
-          </tr>
-          <%})%>
-      </table>
+                </tr>
+                <tr>
+                  <td>PENGGUNA HAK PILIH</td>
+                  <td class="number">
+                    <%=data.KPU.pengguna_j%>
+                  </td>
+                </tr>
+              </table>
+              <h5 class="card-title">DATA PEROLEHAN SUARA</h5>
+              <table class="table table-hover table-bordered table-stripped table-condensed">
+                <tr class="bg-dark">
+                  <th colspan="2" class="text-light">
+                    URAIAN
+                  </th>
+                  <th class="text-light">SUARA SAH </th>
+                </tr>
+                <tr>
+                  <td width="30">1</td>
+                  <td>(01) Ir. H. JOKO WIDODO - Prof. Dr. (H.C) KH. MA'RUF AMIN</td>
+                  <td width="150" class="number">
+                    <%=data.KPU.chart?data.KPU.chart['21']:0%>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="30">2</td>
+                  <td>(02) H. PRABOWO SUBIANTO - H. SANDIAGA SALAHUDIN UNO</td>
+                  <td width="150" class="number">
+                    <%=data.KPU.chart?data.KPU.chart['22']:0%>
+                  </td>
+                </tr>
+              </table>
+              <h5 class="card-title">JUMLAH SUARA SAH DAN TIDAK SAH</h5>
+              <table class="table table-hover table-bordered table-stripped table-condensed">
+                <tr class="bg-dark">
+                  <th colspan="2" class="text-light">URAIAN</th>
+                  <th class="text-light">JUMLAH</th>
+                </tr>
+                <tr>
+                  <td width="30">A</td>
+                  <td>JUMLAH SELURUH SUARA SAH</td>
+                  <td width="150" class="number">
+                    <%=data.KPU.suara_sah%>
+                  </td>
+                </tr>
+                <tr>
+                  <td>B</td>
+                  <td>JUMLAH SUARA TIDAK SAH</td>
+                  <td class="number">
+                    <%=data.KPU.suara_tidak_sah%>
+                  </td>
+                </tr>
+                <tr>
+                  <td>C</td>
+                  <td>JUMLAH SELURUH SUARA SAH DAN SUARA TIDAK SAH</td>
+                  <td class="number">
+                    <%=data.KPU.suara_total%>
+                  </td>
+                </tr>
+              </table>
+              <h5 class="card-title">GAMBAR C1 Plano</h5>
+              <a href="<%=tps_hash+'/'+data.KPU.images[0]%>"><img src="<%=tps_hash+'/'+data.KPU.images[0]%>" class="rounded rounded float-left" alt="..." width="220px;" style="margin-right:10px;"></a>
+                <a href="<%=tps_hash+'/'+data.KPU.images[1]%>"><img src="<%=tps_hash+'/'+data.KPU.images[1]%>" class="rounded rounded float-left" alt="..." width="220px;" style="margin-right:10px;"></a>
+            <%} else{%>
+              <div class="alert alert-danger" role="alert">
+                Belum ada data dari Komisi Pemilihan Umum
+              </div>
+              <%}%>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
       <h1>Catatan</h1>
       <ul>
         <li>Data diatas bersifat sementara selama masa perhitungan suara pemilu</li>

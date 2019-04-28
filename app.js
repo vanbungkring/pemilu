@@ -10,6 +10,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var newIndex = require('./routes/newIndex');
 var tpsDetail = require('./routes/tpssummary');
+var tpsDetail2 = require('./routes/detail');
 var legislatif = require('./routes/electoral');
 var wilayah = require('./routes/wilayah');
 var visual = require('./routes/visual');
@@ -39,7 +40,7 @@ app.use('/visual', visual);
 app.use('/dapil3', usersRouter);
 app.use('/legislatif/', legislatif);
 app.use('/tps/wilayah/', tpsDetail);
-app.use('/tps/detail/', tpsDetail);
+app.use('/tps/detail/', tpsDetail2);
 app.use('/tps/daerah/', wilayah);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -50,6 +51,13 @@ app.locals.hash_helper = function(hashed) {
     data: hashed
   }, 'VANBUNGKRING');
 };
+app.locals.isEmpty = function(object){
+  for(var key in obj) {
+      if(obj.hasOwnProperty(key))
+          return false;
+  }
+  return true;
+}
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

@@ -76,16 +76,16 @@ router.get('/', function(req, res, next) {
         }
       }
     }
-    console.log(sortable);
-    res.render('dapil3', {
-      title: 'DAPIL',
-      data: results,
-      partai: partai,
-      dapil: "JAWA TENGAH III",
-      hasil: results.HASIL.table["3303"],
-      hasil_sorted: sortable,
-      numeral: numeral
-    });
+    res.json(results)
+    // res.render('dapil3', {
+    //   title: 'DAPIL',
+    //   data: results,
+    //   partai: partai,
+    //   dapil: "JAWA TENGAH III",
+    //   hasil: results.HASIL.table["3303"],
+    //   hasil_sorted: sortable,
+    //   numeral: numeral
+    // });
 
   });
 });

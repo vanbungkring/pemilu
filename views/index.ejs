@@ -6,7 +6,7 @@
   <%if(title === 'Nasional'){%>
     <title>Hasil perhitungan Realcount Pilpres 2019 seluruh wilayah Indonesia | Pilpres 2019</title>
     <meta property="og:description" content="Hasil perhitungan Pilpres 2019 seluruh Indonesia. Bandingkan hasil perolehan suara pemilihan presiden dan wakil presiden. Hemat waktumu sekarang!" />
-    <meta property="description" content="Hasil perhitungan Pilpres 2019 seluruh Indonesia. Bandingkan hasil perolehan suara pemilihan presiden dan wakil presiden. Hemat waktumu sekarang!" />
+    <meta property="description" content="Hasil perhitungan Pilpres 2019 seluruh Indonesia Paslon 01 (<%=numeral(data.KPU.chart['21']).format(0,0)%>). Bandingkan hasil perolehan suara pemilihan presiden dan wakil presiden. Hemat waktumu sekarang!" />
     <%} else {%>
       <title>Hasil perhitungan Pilpres 2019 wilayah
         <%=title%> | Pilpres 2019</title>
@@ -28,6 +28,7 @@
         <meta name="language" content="id" />
         <meta name="keywords" content="hasil real count 2019,<%=data.KP.parentNames%>, Jokowi-Amin, Prabowo-Sandi">
         <meta name="geo.country" content="id" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:creator" content="@fastworxid" />
 
         <script>
@@ -247,7 +248,7 @@
                                       <%= parseFloat((suaraKPJS2/(suaraKPJS1+suaraKPJS2))*100).toPrecision(4)%> %)</div>
                                 </td>
                                 <%if((data.KP.data[parseInt(KP[0])]['sum']['cakupan']-data.KP.data[parseInt(KP[0])]['sum']['janggal']-data.KP.data[parseInt(KP[0])]['sum']['pending'])===KP[2]){%>
-                                  <%var total_suara_sah = parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas1'])+parseInt(data.KP.data[parseInt(KP[0])]['sum']['pas2'])%>
+                                  <%var total_suara_sah = parseInt(data.KP.data[parseInt(KP[0])]['sum']['sah'])%>
                                     <%var total_suara_sah_kpu = parseInt(data.KPU.table[parseInt(KP[0])]['21'])+parseInt(data.KPU.table[parseInt(KP[0])]['22'])%>
                                       <%if(total_suara_sah !=total_suara_sah_kpu) {%>
                                         <td class="tg-0lax text-right alert-danger">
@@ -302,7 +303,8 @@
                                                                 <%var progress_kpu_persen =parseFloat(data.KPU.table[parseInt(KP[0])]['persen']).toPrecision(4)%>
                                                                   <%var classing = progress_kpu_persen>50?'bg-success':'bg-warning'%>
 
-                                                                    <div class="progress-bar <%=classing%>" role="progressbar" style="width: <%=parseFloat(progress_kpu_persen)%>%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div><small><strong><%= progress_kpu_persen %>% </strong> estimasi tps terproses</small>
+                                                                    <div class="progress-bar <%=classing%>" role="progressbar" style="width: <%=parseFloat(progress_kpu_persen)%>%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                              </div><small><strong><%= progress_kpu_persen %>% </strong> estimasi tps terproses</small>
                                                             </td>
             </tr>
 
