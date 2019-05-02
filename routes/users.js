@@ -11,18 +11,18 @@ const numeral = require('numeral');
 const async = require('async');
 
 router.get('/', function(req, res, next) {
-  async.parallel({
+  console.log('called');
+  async.series({
     PARTAI: function(callback) {
+      console.log(PARTAI);
       callback(null, PARTAI);
-    },
-    DAPIL: function(callback) {
-      return (DAPIL_STATIC);
     },
     HASIL: function(callback) {
       request(HASIL, {
         json: true,
         strictSSL: false
       }, (err, res, body) => {
+        console.log(body);
         if (err) {
           console.log(err);
           callback(err, null);
@@ -32,6 +32,7 @@ router.get('/', function(req, res, next) {
       });
     }
   }, function(err, results) {
+    console.log(results);
     var partai = Object.values(results.PARTAI);
     var hasil = Object.values(results.HASIL);
     if (req.xhr) {
@@ -76,16 +77,15 @@ router.get('/', function(req, res, next) {
         }
       }
     }
-    res.json(results)
-    // res.render('dapil3', {
-    //   title: 'DAPIL',
-    //   data: results,
-    //   partai: partai,
-    //   dapil: "JAWA TENGAH III",
-    //   hasil: results.HASIL.table["3303"],
-    //   hasil_sorted: sortable,
-    //   numeral: numeral
-    // });
+    res.render('dapil3', {
+      title: 'DAPIL',
+      data: results,
+      partai: partai,
+      dapil: "JAWA TENGAH III",
+      hasil: results.HASIL.table["3303"],
+      hasil_sorted: sortable,
+      numeral: numeral
+    });
 
   });
 });
